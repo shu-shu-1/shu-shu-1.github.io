@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>可爱的圆盘时钟</title>
+    <meta name="viewport"  content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta name="author" content="Dajun"/>
+    <link rel="stylesheet" href="css/clock.css"/>
+</head>
+<body>
+<div class="t2">
+    <div class="t3">
+        <div class="t4">
+            <i class="hour hour3">3</i>
+            <i class="hour hour6">6</i>
+            <i class="hour hour9">9</i>
+            <i class="hour hour12">12</i>
+
+            <div id="miao"></div>
+            <div id="fen"></div>
+            <div id="shi"></div>
+            <div id="point"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var miao = document.getElementById("miao");
+    var fen = document.getElementById("fen");
+    var shi = document.getElementById("shi");
+
+    var clock = setInterval(function () {
+        var nowDate = new Date();//每次读取当前时间
+        var hour = nowDate.getHours();
+        var minute = nowDate.getMinutes();
+        var second = nowDate.getSeconds();
+
+        var circleHour = hour % 12 * 30;
+        shi.style.transform = "rotate(" + circleHour + "deg)";//读取到的时间为24小时制，转换为12小时
+        fen.style.transform = "rotate(" + minute * 6 + "deg)";
+        miao.style.transform = "rotate(" + second * 6 + "deg)";
+    }, 1000);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

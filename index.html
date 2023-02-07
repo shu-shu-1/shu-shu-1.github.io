@@ -1,58 +1,58 @@
 <!DOCTYPE html>
-<html lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Blog Page</title>
-        <!-- 引入jQuery3.6.0 -->
-        <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
-        <style>
-            body {
-            	/* 图片引自百度 可根据需求变换 */
-                background-image: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F017206591c1f38a801216a3e5f6158.png%402o.jpg&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1656833203&t=1dbf3ec360d6fa6b3811f7b276016acd");
-            }
-            .text {
-                color: white;
-                text-shadow: 5px 5px gray;  /* 字体阴影 */
-                font-size: 35px;
-                font-family: KaiTi;
-            }
-            .source {
-                color: white;
-                font-size: 25px;
-                padding-left: 40%;
-                font-family: KaiTi;
-            }
-            .show-sentence {
-                display: none;    /* 一开始隐藏div标签 */
-                text-align: center;
-            }
-        </style>
-        <script>
-        	// 异步ajax
-            $.ajax({
-                type: 'GET',
-                url: 'https://api.fghrsh.net/hitokoto/rand/?encode=jsc&uid=3335',
-                success: function(data){
-                    $(".text").text(data.hitokoto);  // 获取名言内容
-                    if (data.source){     // 如果来源不为空
-                        $(".author").text(data.source);
-                    } else {
-                        $(".source").hide();   // 隐藏来源
-                    }
-                    // 淡入显示
-                    $(".show-sentence").fadeIn(4000)
-                },
-            });
-        </script>
-    </head>
-    <body>
-        <div class="show-sentence">
-            <p class="text"></p>
-            <p class="source">
-                ———— <span class="author"></span>
-            </p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wangzirui32 个人Github博客页面</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <style>
+        html{
+            height: 100%;
+        }
+        body {
+            background-image: url("/bg.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>小树个人网站 <small>Github Pages</small></h1>
+                <p>这里是小树的个人网站，更多信息请往下继续浏览，站点由Github Pages提供！</p>
+            </div>
         </div>
-    </body>
+        <h3>这个网站</h3>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/一言.html">一言</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10923311.html">Python网络爬虫</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10769409.html">Python模块介绍使用</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10807102.html">HTML</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_11747585.html">Boostarp</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10812072.html">JavaScript</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10926142.html">jQuery</a></li>
+        </ul>
+        <h3>CSDN专栏文章</h3>
+        <ul class="list-group1">
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10745800.html">Python</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10923311.html">Python网络爬虫</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10769409.html">Python模块介绍使用</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10807102.html">HTML</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_11747585.html">Boostarp</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10812072.html">JavaScript</a></li>
+            <li class="list-group-item"><a href="https://blog.csdn.net/wangzirui32/category_10926142.html">jQuery</a></li>
+        </ul>
+        <h3>其他资源</h3>
+        <div class="links">
+            <a href="https://github.com/shu-shu-1" class="btn btn-primary">Github</a>
+            <a href="https://blog.csdn.net/wangzirui32" class="btn btn-danger">CSDN</a>
+            <a href="https://gitee.com/wangzirui32" class="btn btn-warning">Gitee</a>
+        </div>
+    </div>
+</body>
 </html>

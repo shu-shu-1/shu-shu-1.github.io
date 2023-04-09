@@ -44,5 +44,31 @@
             <a href="https://alist-replit.zsxiaoshu1.repl.co/" class="btn btn-warning">我的网盘</a>
         </div>
     </div>
+    <div class="container">
+        <h3>神秘代码</h3>
+        <form>
+            <div class="form-group">
+                <label for="codeInput">请输入神秘代码:</label>
+                <input type="text" class="form-control" id="codeInput">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="checkCode()">提交</button>
+        </form>
+    </div>
+    <script>
+        function checkCode() {
+            var code = document.getElementById("codeInput").value;
+            if (code === "") {
+                alert("请输入神秘代码！");
+            } else {
+                var url = "https://shu-shu-1.github.io/" + code + ".html";
+                window.open(url);
+            }
+        }
+    </script>
+
+
+
+
 </body>
 </html>
+

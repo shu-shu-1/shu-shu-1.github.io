@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>字数统计器</title>
+  <style>
+    /* 界面整体新拟物风样式 */
+    body {
+      background-color: #F2F2F2;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 20px;
+    }
+    .box {
+      background-color: #FFFFFF;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    /* 文本编辑器样式 */
+    textarea {
+      width: 100%;
+      height: 200px;
+      border: none;
+      outline: none;
+      padding: 10px;
+      font-size: 16px;
+      resize: none;
+      overflow-y: scroll;
+    }
+    /* 统计结果表格样式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #DDD;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>字数统计器</h1>
+    <textarea id="content" placeholder="请输入内容"></textarea>
+    <table>
+      <thead>
+        <tr>
+          <th>字符数</th>
+          <th>中文数</th>
+          <th>标点数</th>
+          <th>英文数</th>
+          <th>文字字数(不包括空格)</th>
+          <th>空格数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="charCount">0</td>
+          <td id="chineseCount">0</td>
+          <td id="punctuationCount">0</td>
+          <td id="englishCount">0</td>
+          <td id="wordCount">0</td>
+          <td id="spaceCount">0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<script>
+  const content = document.getElementById('content');
+  const charCount = document.getElementById('charCount');
+  const chineseCount = document.getElementById('chineseCount');
+  const punctuationCount = document.getElementById('punctuationCount');
+  const englishCount = document.getElementById('englishCount');
+  const wordCount = document.getElementById('wordCount');
+  const spaceCount = document.getElementById('spaceCount');
+  
+  // 统计字符数、中文数、标点数、英文数、文字字数、空格数
+  function updateStatistics() {
+    const text = content.value;
+    charCount.innerText = text.length;
+    chineseCount.innerText = text.replace(/[^\u4E00-\u9FA5]/g, "").length;
+    punctuationCount.innerText = text.replace(/[^\u3002\uff1f\uff01\uff0c\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019]/g, "").length;
+    englishCount.innerText = text.replace(/[^A-Za-z]/g, "").length;
+    wordCount.innerText = text.replace(/\s+/g, "").length;
+    spaceCount.innerText = text.split(" ").length - 1;
+
+  }
+  
+  // 监听文本编辑器输入事件
+  content.addEventListener('input', updateStatistics);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+/* 基础样式 */
+a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #0091ea;
+    text-decoration: underline;
+  }
+  
+  a:focus {
+    outline: none;
+  }
+  
+  a.button {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    background-color: #00c853;
+    text-decoration: none;
+    font-size: 14px;  
+    transition: all 0.3s ease-in-out;
+  }
+  
+  a.button:hover {
+    opacity: 0.8;
+  }
+  
+  a.copy {
+    background-color: #0091ea;
+  }
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* 页面布局 */
+  header {
+    padding: 30px;
+    background-color: #f0f0f0;
+    text-align: center;
+  }
+  
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px;
+  }
+  
+  section {
+    margin-right: 50px;
+    flex: 1;
+  }
+  
+  ul.resources {
+    list-style: none;
+  }
+  
+  li {
+    display: flex;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .thumbnail {
+    flex: 0 0 200px;
+    height: 180px;
+    background-color: #f0f0f0;
+  }
+  
+  .info {
+    margin: 20px;
+    flex: 1;
+  }
+  
+  .info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .info p {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;  
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    opacity: 0.8;
+  }
+  
+  .download {
+    background-color: #00c853;
+  }
+  
+  .copy {
+    background-color: #0091ea;
+  }
+  
+  .copy:focus {
+    outline: none;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  /* 响应式布局 */
+  @media screen and (max-width: 768px) {
+    main {
+      flex-wrap: wrap;
+    }
+    
+    section {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+    
+    .thumbnail {
+      display: none;
+    }
+    
+    .info {
+      margin-left: 0;
+    }
+  }
+  

@@ -283,22 +283,22 @@
 		  <h3>神秘代码</h3>
 		  <form>
 			<div class="form-group">
-			  <标签 for="codeInput">请输入神秘代码:</标签>
-			  <input 类型="text" class="form-control" id="codeInput">
+			  <label for="codeInput">请输入神秘代码:</label>
+			  <input type="text" class="form-control" id="codeInput">
 			</div>
-			<button 类型="button" onclick="checkCode()">提交</button>
+			<button type="button" onclick="checkCode()">提交</button>
 		  </form>
 		</div>
 
 		<script>
 			function checkCode() {
-				var 代码 = document.getElementById("codeInput")。value;
+				var code = document.getElementById("codeInput").value;
 				if (code === "") {
 					alert("请输入神秘代码！");
 				} else {
 					var url = "https://shu-shu-1.github.io/" + code + ".html";
-					window.位置。href = url;
-					window.已打开(url);
+					window.location.href = url;
+					window.open(url);
 				}
 			}
 		</script>
@@ -312,15 +312,15 @@
 
 .button {
   background-color: #fff;
-  border: 无;
+  border: none;
   color: #333;
   font-size: 16px;
   padding: 10px 20px;
   border-radius: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: 所有 0.3s ease;
-  text-decoration: 无;
+  transition: all 0.3s ease;
+  text-decoration: none;
   margin-right: 10px; /* 这里设置了按钮之间的间隔为 10px */
 }
 
@@ -339,6 +339,6 @@
   <a href="./ord_index.html" class="button">旧版页面</a>
   <a href="/about/" class="button">关于</a>
 </div>
-</内容>
+</body>
 
 </html>

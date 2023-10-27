@@ -1,9 +1,56 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>古风诗词</title>
+    <style>
+		@font-face {
+			font-family: 霞鹜文楷;
+			src: url(./font/霞鹜文楷.ttf);
+		}
+        /* 设置背景图片 */
+        body {
+            background-image: url("./shici.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
 
-<span id="jinrishici-sentence">正在加载今日诗词....</span>
-<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-</script>
+        /* 样式化诗词内容 */
+        .poem {
+            font-family: "霞鹜文楷", serif;
+            font-size: 24px;
+            color: #000;
+            text-align: center;
+            margin-top: 200px;
+        }
 
+        /* 样式化出处信息 */
+        .source {
+            font-size: 16px;
+            text-align: right;
+            margin-top: 20px;
+			font-family: "霞鹜文楷", serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="poem">
+        <!-- 这里是诗词内容 -->
+        <p id="poemContent">加载中，请稍候</p>
+    </div>
+
+    <div class="source" id="poemSource">
+        <!-- 这里是诗词的出处信息 -->
+    </div>
+
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        jinrishici.load(function(result) {
+            // 将诗词内容填充到页面中
+            document.getElementById("poemContent").innerHTML = result.data.content;
+            // 将诗词的出处信息填充到页面中
+            document.getElementById("poemSource").innerHTML = "——" + '【' + result.data.origin.dynasty + '】' + result.data.origin.author + "⌈" + result.data.origin.title + "⌋";
+        });
+    </script>
+</body>
 </html>
-

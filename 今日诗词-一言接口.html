@@ -44,23 +44,27 @@
     </div>
 
     <script type="text/javascript">
-        // 发送异步请求获取诗句
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var result = JSON.parse(xhr.responseText);
-                    // 将诗词内容填充到页面中
-                    document.getElementById("poemContent").innerHTML = result.hitokoto;
-                    // 将诗词的出处信息填充到页面中
-                    document.getElementById("poemSource").innerHTML = "——" + '【' + result.from_who + '】' + "⌈" + result.from + "⌋";
-                } else {
-                    console.log('请求失败');
-                }
-            }
-        };
-        xhr.open('GET', 'https://v1.hitokoto.cn/?c=i', true);
-        xhr.send();
+		// 发送异步请求获取诗句
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === XMLHttpRequest.DONE) {
+				if (xhr.status === 200) {
+					var result = JSON.parse(xhr.responseText);
+					// 将诗词内容填充到页面中
+					document.getElementById("poemContent").innerHTML = result.hitokoto;
+					// 将诗词的出处信息填充到页面中
+					if (result.from_who) {
+						document.getElementById("poemSource").innerHTML = "——【" + result.from_who + "】⌈" + result.from + "⌋";
+					} else {
+						document.getElementById("poemSource").innerHTML = "——【侠名】⌈" + result.from + "⌋";
+					}
+				} else {
+					console.log('请求失败');
+				}
+			}
+		};
+		xhr.open('GET', 'https://v1.hitokoto.cn/?c=i', true);
+		xhr.send();
     </script>
 </body>
 </html>

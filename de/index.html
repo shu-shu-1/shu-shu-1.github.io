@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>平面设计工具</title>
     <link rel="icon" href="./favicon.ico">
+    <script src="https://unpkg.com/sober/dist/sober.min.js"></script>
     <script>var stop, staticx; var img = new Image(); img.src = 'https://www.jikexinao.com/api/public/img/a59a8d391bcd49e5b641e80793e85f33.png'; var sakuraNum = 50; var limitTimes = 5; var limitArray = new Array(sakuraNum); for(var index = 0; index < sakuraNum; index++){ limitArray[index] = limitTimes; } function Sakura(x, y, s, r, fn, idx) { this.x = x; this.y = y; this.s = s; this.r = r; this.fn = fn; this.idx = idx; } Sakura.prototype.draw = function(cxt) { cxt.save(); var xc = 40 * this.s / 4; cxt.translate(this.x, this.y); cxt.rotate(this.r); cxt.drawImage(img, 0, 0, 40 * this.s, 40 * this.s); cxt.restore(); }; Sakura.prototype.update = function() { this.x = this.fn.x(this.x, this.y); this.y = this.fn.y(this.y, this.y); this.r = this.fn.r(this.r); if(this.x > window.innerWidth || this.x < 0 || this.y > window.innerHeight || this.y < 0) { if (limitArray[this.idx] == -1) { this.r = getRandom('fnr'); if(Math.random() > 0.4) { this.x = getRandom('x'); this.y = 0; this.s = getRandom('s'); this.r = getRandom('r'); } else { this.x = window.innerWidth; this.y = getRandom('y'); this.s = getRandom('s'); this.r = getRandom('r'); } } else { if (limitArray[this.idx] > 0) { this.r = getRandom('fnr'); if(Math.random() > 0.4) { this.x = getRandom('x'); this.y = 0; this.s = getRandom('s'); this.r = getRandom('r'); } else { this.x = window.innerWidth; this.y = getRandom('y'); this.s = getRandom('s'); this.r = getRandom('r'); } limitArray[this.idx]--; } else { limitArray[this.idx] = limitTimes; } } } }; SakuraList = function() { this.list = []; }; SakuraList.prototype.push = function(sakura) { this.list.push(sakura); }; SakuraList.prototype.update = function() { for(var i = 0, len = this.list.length; i < len; i++) { this.list[i].update(); } }; SakuraList.prototype.draw = function(cxt) { for(var i = 0, len = this.list.length; i < len; i++) { this.list[i].draw(cxt); } }; SakuraList.prototype.get = function(i) { return this.list[i]; }; SakuraList.prototype.size = function() { return this.list.length; }; function getRandom(option) { var ret, random; switch(option) { case 'x': ret = Math.random() * window.innerWidth; break; case 'y': ret = Math.random() * window.innerHeight; break; case 's': ret = Math.random(); break; case 'r': ret = Math.random() * 6; break; case 'fnx': random = -0.5 + Math.random() * 1; ret = function(x, y) { return x + 0.2 * random - 0.85; }; break; case 'fny': random = 0.75 + Math.random() * 0.35; ret = function(x, y) { return y + random; }; break; case 'fnr': random = Math.random() * 0.03; ret = function(r) { return r + random; }; break; } return ret; } function startSakura() { requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame; var canvas = document.createElement('canvas'), cxt; staticx = true; canvas.height = window.innerHeight; canvas.width = window.innerWidth; canvas.setAttribute('style', 'position: fixed; left: 0; top: 0; pointer-events: none;'); canvas.setAttribute('id', 'canvas_sakura'); document.getElementsByTagName('body')[0].appendChild(canvas); cxt = canvas.getContext('2d'); var sakuraList = new SakuraList(); for(var i = 0; i < sakuraNum; i++) { var sakura, randomX, randomY, randomS, randomR, randomFnx, randomFny, randomFnR; randomX = getRandom('x'); randomY = getRandom('y'); randomR = getRandom('r'); randomS = getRandom('s'); randomFnx = getRandom('fnx'); randomFny = getRandom('fny'); randomFnR = getRandom('fnr'); sakura = new Sakura(randomX, randomY, randomS, randomR, { x: randomFnx, y: randomFny, r: randomFnR }, i); sakura.draw(cxt); sakuraList.push(sakura); } stop = requestAnimationFrame(function() { cxt.clearRect(0, 0, canvas.width, canvas.height); sakuraList.update(); sakuraList.draw(cxt); stop = requestAnimationFrame(arguments.callee); }); } window.onresize = function() { var canvasSakura = document.getElementById('canvas_sakura'); if (canvasSakura) { canvasSakura.width = window.innerWidth; canvasSakura.height = window.innerHeight; } }; img.onload = function() { startSakura(); }; function stopp() { if(staticx) { var child = document.getElementById('canvas_sakura'); child.parentNode.removeChild(child); window.cancelAnimationFrame(stop); staticx = false; } else { startSakura(); } }</script>
     <style>
         body {
@@ -178,21 +180,7 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            padding: 15px 30px;
-            font-size: 16px;
-            color: #333;
-            background: #e0e0e0;
-            border-radius: 20px;
-            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            line-height: normal;
-        }
-        .fixed-link:active {
-            box-shadow: inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff;
+            background: #ED73B1;
         }
         a {
             position: relative;
@@ -264,21 +252,28 @@
         .slider.round:before {
             border-radius: 50%;
         }
+        .left-body{
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .highlight {
+            background-color: yellow;
+        }
     </style>
 </head>
 <body>
-    <div class="switch-container">
-        <label class="switch">
-            <input type="checkbox" checked onclick="stopp()">
-            <span class="slider round"></span>
-        </label>
-    </div>
-    <a class="fixed-link" href='https://www.photopea.com/'>在线PS</a>
+
+
+    <div class="left-body"><s-switch checked="true" style="color: #ED73B1" onclick="stopp()"></s-switch></div>
+    <s-button class="fixed-link" onclick="window.open('https://www.photopea.com/', '_blank'); return false;"> 在线PS</s-button>
+    
     <h1>平面设计工具</h1>
     <div class="notice">注：有些网页在国内访问可能缓慢，已用角标标明。</div>
     <div class="info">点击网页图标或名称打开网页</div>
     <div class="container">
         <h2>图片搜索引擎</h2>
+        
         <div class="card-container">
             <div class="card">
                 <a href="https://cn.bing.com/images/search?q=%e4%b8%96%e7%95%8c%e6%97%85%e6%b8%b8%e8%83%9c%e5%9c%b0&form=HDRSC2&first=1" target="_blank">

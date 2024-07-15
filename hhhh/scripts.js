@@ -1,3 +1,13 @@
+/*
+ * @Author: xiaoshu âzs3458222@outlook.com
+ * @Date: 2024-07-15 13:31:30
+ * @LastEditors: xiaoshu âzs3458222@outlook.com
+ * @LastEditTime: 2024-07-15 13:49:19
+ * @FilePath: \themed:\code\html\hhhh\scripts.js
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by shu-shu-1 3458222@qq.com, All Rights Reserved. 
+ */
 document.addEventListener("DOMContentLoaded", function() {
     const imageContainer = document.getElementById("imageContainer");
     const mainImage = document.getElementById("mainImage");
@@ -12,8 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(() => {
         imageContainer.style.display = "none";
         mainVideo.style.display = "block";
+        
+        // Autoplay the video
         mainVideo.play();
 
+        // Request fullscreen
         if (mainVideo.requestFullscreen) {
             mainVideo.requestFullscreen();
         } else if (mainVideo.mozRequestFullScreen) { // Firefox

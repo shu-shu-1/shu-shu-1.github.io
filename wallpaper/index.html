@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小树壁纸</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            position: relative; 
+            background-image: url('https://i.postimg.cc/KjztVB7W/image.png'); /* 添加背景图片 */
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh; /* 确保内容至少填满整个视口高度 */
+            margin: 0; /* 去掉默认边距 */
+            padding-bottom: 60px; /* 为底栏留出空间 */
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.2); /* 半透明白色层 */
+            z-index: -1;
+        }
+        h1 { font-size: 2em; margin: 20px; }
+        p { width: 60%; margin: 0 auto; line-height: 1.5; }
+        .button-group { margin: 20px; }
+        .button { 
+            padding: 10px 20px; 
+            margin: 10px; 
+            background-color: #000; 
+            color: #fff; 
+            border: none; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-size: 1em; 
+            transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
+        }
+        .button:hover {
+            background-color: #fff; /* 悬停时背景颜色变为白色 */
+            color: #000; /* 悬停时文字颜色变为黑色 */
+        }
+        .outline-button {
+            padding: 10px 20px; 
+            margin: 10px; 
+            background-color: transparent; 
+            color: rgb(51, 65, 85);  
+            border: 2px solid #D7DADF;  
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-size: 1em; 
+            transition: background-color 0.3s, color 0.3s; /* 添加过渡效果 */
+        }
+        .outline-button:hover {
+            background-color: rgb(51, 65, 85); /* 悬停时背景颜色变为紫色 */
+            color: #fff; /* 悬停时文字颜色变为白色 */
+        }
+        img {
+            width: 80px; /* 设置 logo 的宽度 */
+            height: auto; /* 高度自适应 */
+            border-radius: 15px; /* 设置圆角 */
+            margin: 20px 0; /* 上下外边距 */
+        }
+        .video-container {
+            margin: 20px auto;
+            max-width: 80%;
+        }
+        video {
+            width: 100%; /* 让视频宽度自适应 */
+            height: auto; /* 高度自动调整保持比例 */
+        }
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* 垂直居中对齐 */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            position: fixed; /* 固定底栏 */
+            bottom: 0;
+            left: 0;
+            right: 0; /* 确保底栏横跨整个视口 */
+        }
+        footer div {
+            flex: 1; /* 允许左右两侧的内容填充可用空间 */
+            max-width: 50%; /* 限制最大宽度 */
+            text-align: left; /* 左对齐文本 */
+        }
+        a {
+            color: gray; /* 设置链接颜色为灰色 */
+            text-decoration: none; /* 去掉下划线 */
+        }
+        a:hover {
+            text-decoration: underline; /* 悬停时添加下划线 */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://i.postimg.cc/C5BdV1WJ/image.jpg" alt="小树壁纸Logo">
+        <h1>小树壁纸</h1>
+        <p>提升你的桌面体验</p>
+    </header>
+
+    <main>
+        <p>小树壁纸是一款开源的Windows桌面壁纸应用，它可以帮助你更换桌面背景，提高工作效率，提升视觉享受，使你的桌面不再单调.<br>
+        本软件提供了多种风格、来源的壁纸，你可以根据自己的喜好选择喜欢的风格
+        </p>
+        
+        <div class="button-group">
+            <button class="button" onclick="window.location.href='https://api.leafone.cn/api/lanzou?url=https://wwo.lanzouo.com/iIPRF21vclad&pwd=1234&type=down'">下载 稳定版 v5.1.0 Windows x64 安装包</button>
+            <button class="outline-button" onclick="window.location.href='https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/'">查看更新日志和下载测试版</button>
+            <button class="outline-button" onclick="window.location.href='https://github.com/shu-shu-1/Xiaoshu-Wallpaper'">前往Github开源仓库</button>
+        </div>
+
+        <div class="video-container">
+            <video controls>
+                <source src="https://www.jikexinao.com/api/public/file/318f3fe4a60f41eca31f2c478fc1d5a4.mp4" type="video/mp4">
+                您的浏览器不支持视频标签。
+            </video>
+            <p>宣传片</p>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <p><a href="#">用户协议</a></p>
+            <p><a href="https://www.gnu.org/licenses/agpl-3.0.zh-cn.html">开源协议</a></p>
+            <p><a href="/ord_wallpaper.html">跳转旧官网</a></p>
+        </div>
+        <div>
+            <p>联系邮箱<a href="mailto:zs3458222@outlook.com">zs3458222@outlook.com</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

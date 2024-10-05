@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小树的GitHub页面</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bg-gradient {
+            background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
+        }
+        .card {
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gradient min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">小树的 GitHub 页面</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">🤖 AI合集</h2>
+                <p class="text-gray-600 mb-4">AI镜像/官网/免登录/需登录 都有</p>
+                <a href="./ai.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div> -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">💬 一言</h2>
+                <p class="text-gray-600 mb-4">随机一言，许多名言警句</p>
+                <a href="./一言.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">📜 今日诗词</h2>
+                <p class="text-gray-600 mb-4">今日诗词，让你领略诗词之美</p>
+                <a href="./今日诗词.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">🔢 字符统计</h2>
+                <p class="text-gray-600 mb-4">统计您输入的中文、英文、空格等</p>
+                <a href="./字符统计.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">✨ 粒子效果文本生成</h2>
+                <p class="text-gray-600 mb-4">用粒子效果展示您输入的文本</p>
+                <a href="./粒子效果文本生成.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">🕰️ 可爱的圆盘时钟</h2>
+                <p class="text-gray-600 mb-4">可爱的圆盘时钟，可以拿来全屏当屏保</p>
+                <a href="./可爱的圆盘时钟.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">📚 资源</h2>
+                <p class="text-gray-600 mb-4">本站收集的一些资源、软件等</p>
+                <a href="./资源.html" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <h2 class="text-xl font-semibold mb-2">🎨 平面设计工具箱</h2>
+                <p class="text-gray-600 mb-4">平面设计工具、资源网站</p>
+                <a href="./de" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card"></div>
+                <h2 class="text-xl font-semibold mb-2">🕹️ 原神</h2>
+                <p class="text-gray-600 mb-4">与原神有关工具的网站和一些个人收集</p>
+                <a href="./yuanshen/" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-6 card"></div>
+                <h2 class="text-xl font-semibold mb-2">🕹️ 饿殍：明末千里行</h2>
+                <p class="text-gray-600 mb-4">饿殍：明末千里行的展示页与个人收集的壁纸</p>
+                <a href="./sui/" class="inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">访问</a>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-12">
+            <h2 class="text-2xl font-semibold mb-4">神秘代码</h2>
+            <p class="text-gray-600 mb-4">输入神秘代码以访问隐藏内容</p>
+            <form id="codeForm" class="flex space-x-2">
+                <input type="text" id="codeInput" placeholder="输入神秘代码..." class="flex-grow border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">提交</button>
+            </form>
+        </div>
+
+        <div class="flex justify-center space-x-4 mb-8">
+            <a href="https://github.com/shu-shu-1" target="_blank" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors">GitHub</a>
+            <a href="https://www.luogu.com.cn/user/773262" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-400 transition-colors">洛谷</a>
+            <a href="https://space.bilibili.com/1140831443" target="_blank" class="bg-pink-400 text-white px-4 py-2 rounded hover:bg-pink-300 transition-colors">Bilibili</a>
+
+            <!-- <a href="https://flowus.cn/yingji_xiaoshu/share/0ca3a004-59ee-4be0-8d08-f74785192677" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">息流</a> -->
+            <!-- <a href="https://alist-replit.zsxiaoshu1.repl.co/" target="_blank" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors">网盘</a> -->
+        </div>
+
+        <div class="flex justify-center space-x-4">
+            <a href="./more_index.html" class="text-blue-500 hover:underline">主页档案馆</a>
+            <a href="/about/" class="text-blue-500 hover:underline">关于</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('codeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var code = document.getElementById('codeInput').value.trim();
+            if (code === '') {
+                alert('请输入神秘代码！');
+            } else {
+                var url = '/' + code + '.html';
+                window.open(url, '_blank');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饿殍：明末千里行壁纸画廊</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .wallpaper {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .wallpaper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .wallpaper:hover img {
+            transform: scale(1.05);
+        }
+        .wallpaper:hover::after {
+            content: "点击查看";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .download {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>饿殍：明末千里行壁纸画廊</h1>
+    <div class="gallery">
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/zf2yRGXj/image.jpg')">
+            <img src="https://i.postimg.cc/zf2yRGXj/image.jpg" alt="Wallpaper 1">
+        </div>
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/ZRjVN3vQ/image.jpg')">
+            <img src="https://i.postimg.cc/ZRjVN3vQ/image.jpg" alt="Wallpaper 2">
+        </div>
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/FRVG56y8/4b290f6e-b886-effb-b9b1-4a97bbeea0fe.jpg')">
+            <img src="https://i.postimg.cc/FRVG56y8/4b290f6e-b886-effb-b9b1-4a97bbeea0fe.jpg" alt="Wallpaper 3">
+        </div>
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/3RZMSndJ/a3cde8b4-0197-1ad3-3760-9cb95dbc6517.jpg')">
+            <img src="https://i.postimg.cc/3RZMSndJ/a3cde8b4-0197-1ad3-3760-9cb95dbc6517.jpg" alt="Wallpaper 4">
+        </div>
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/02RWMpQV/ea0ff1ca-0358-4fca-b2bb-5b3a51706bdc.jpg')">
+            <img src="https://i.postimg.cc/02RWMpQV/ea0ff1ca-0358-4fca-b2bb-5b3a51706bdc.jpg" alt="Wallpaper 5">
+        </div>
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/qRttT6HK/f5fd0dc2722faf65c455943574b087863546706878663505.jpg')">
+            <img src="https://i.postimg.cc/qRttT6HK/f5fd0dc2722faf65c455943574b087863546706878663505.jpg" alt="Wallpaper 6">
+        </div>
+        <div class="wallpaper" onclick="openModal('https://i.postimg.cc/0NZ9J3vB/ss-f1ba762ccb2918909b05051891316f27ecbbb245-1920x1080.jpg')">
+            <img src="https://i.postimg.cc/0NZ9J3vB/ss-f1ba762ccb2918909b05051891316f27ecbbb245-1920x1080.jpg" alt="Wallpaper 6">
+        </div>        
+    </div>
+
+    <div id="modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Large Wallpaper">
+        </div>
+        <a href="#" class="download" onclick="downloadWallpaper(event)">下载</a>
+    </div>
+
+    <script>
+        function openModal(src) {
+            document.getElementById('modal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function downloadWallpaper(event) {
+            event.preventDefault();
+            var imgSrc = document.getElementById('modalImage').src;
+            var fileName = 'wallpaper.jpg';
+
+            fetch(imgSrc)
+                .then(response => response.blob())
+                .then(blob => {
+                    var blobUrl = window.URL.createObjectURL(blob);
+                    var link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    window.URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(link);
+                })
+                .catch(error => {
+                    console.error('下载失败:', error);
+                    alert('下载失败，请稍后重试。');
+                });
+        }
+    </script>
+</body>
+</html>

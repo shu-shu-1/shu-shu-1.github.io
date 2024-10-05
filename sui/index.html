@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饿殍：明末千里行</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'SimSun', 'STSong', serif;
+        }
+
+        /* 隐藏视频控件 */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        /* 全屏视频样式 */
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* 水墨风按钮样式 */
+        .ink-button {
+            padding: 15px 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #000;
+            border: 2px solid #000;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ink-button::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid #000;
+            opacity: 0.5;
+        }
+
+        .ink-button:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        #playMusicButton {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        #galleryButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 全屏视频 -->
+    <video autoplay muted loop playsinline>
+        <source src="https://gitdl.cn/https://raw.githubusercontent.com/shu-shu-1/API/main/output.mp4" type="video/mp4">
+        您的浏览器不支持视频标签。
+    </video>
+
+    <!-- 背景音乐 -->
+    <audio id="backgroundMusic" src="https://jsd.proxy.aks.moe/gh/shu-shu-1/API@main/%E6%98%8E%E6%9C%AB%E5%8D%83%E9%87%8C%E8%A1%8C%20-%20Zerocreation%20Games.mp3" playsinline></audio>
+
+    <!-- 播放音乐按钮 -->
+    <button id="playMusicButton" class="ink-button">点击播放音乐</button>
+
+    <!-- 前往壁纸图库按钮 -->
+    <button id="galleryButton" class="ink-button">前往壁纸图库</button>
+
+    <script>
+        const music = document.getElementById('backgroundMusic');
+        const playButton = document.getElementById('playMusicButton');
+        const galleryButton = document.getElementById('galleryButton');
+
+        // 尝试自动播放
+        function tryPlayMusic() {
+            music.play().catch(() => {
+                playButton.style.display = 'block'; // 显示按钮以供用户手动播放
+            });
+        }
+
+        // 初始尝试播放音乐
+        tryPlayMusic();
+
+        // 添加按钮点击事件
+        playButton.addEventListener('click', () => {
+            music.play();
+            playButton.style.display = 'none';
+        });
+
+        // 音乐播放和暂停事件监听
+        music.addEventListener('play', () => {
+            playButton.style.display = 'none';
+        });
+
+        music.addEventListener('pause', () => {
+            playButton.style.display = 'block';
+        });
+
+        // 前往壁纸图库按钮点击事件
+        galleryButton.addEventListener('click', () => {
+            // 这里添加跳转到壁纸图库的逻辑
+            alert('跳转到壁纸图库');
+            // 例如：window.location.href = '壁纸图库的URL';
+        });
+    </script>
+
+</body>
+</html>

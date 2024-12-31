@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小树壁纸</title>
+    <link rel="stylesheet" href="mdui.css">
+    <script src="marked.min.js"></script>
+    <script src="mdui.global.js"></script>
+    <link rel="stylesheet" href="icon.css">
+    
+    <link rel="icon" href="http://cdnjson.com/images/2024/10/31/remove.photos-removed-background.png">
+
+    <style>
+        .logo {
+            width: 120px;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        .video-container{
+            width: 100px;
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 70vw; 
+            max-height: 70vh; 
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 3;
+        }
+
+        video, .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .lang-select {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 114514;
+
+        }
+
+
+
+    </style>
+    
+    <script>
+        mdui.setColorScheme('#AB2D25');
+
+
+    </script>
+
+</head>
+
+
+
+<div class="deng-box2"><div class="deng"><div class="xian"></div><div class="deng-a"><div class="deng-b"><div class="deng-t"></div></div></div><div class="shui shui-a"><div class="shui-c"></div><div class="shui-b"></div></div></div></div><div class="deng-box3"><div class="deng"><div class="xian"></div><div class="deng-a"><div class="deng-b"><div class="deng-t"></div></div></div><div class="shui shui-a"><div class="shui-c"></div><div class="shui-b"></div></div></div></div><div class="deng-box1"><div class="deng"><div class="xian"></div><div class="deng-a"><div class="deng-b"><div class="deng-t"></div></div></div><div class="shui shui-a"><div class="shui-c"></div><div class="shui-b"></div></div></div></div><div class="deng-box"><div class="deng"><div class="xian"></div><div class="deng-a"><div class="deng-b"><div class="deng-t"></div></div></div><div class="shui shui-a"><div class="shui-c"></div><div class="shui-b"></div></div></div></div><style type="text/css">.deng-box{position:fixed;top:-40px;right:-20px;z-index:9999;pointer-events:none}.deng-box1{position:fixed;top:-30px;right:10px;z-index:9999;pointer-events:none}.deng-box2{position:fixed;top:-40px;left:-20px;z-index:9999;pointer-events:none}.deng-box3{position:fixed;top:-30px;left:10px;z-index:9999;pointer-events:none}.deng-box1 .deng,.deng-box3 .deng{position:relative;width:120px;height:90px;margin:50px;background:#d8000f;background:rgba(216,0,15,.8);border-radius:50% 50%;-webkit-transform-origin:50% -100px;-webkit-animation:swing 5s infinite ease-in-out;box-shadow:-5px 5px 30px 4px #fc903d}.deng{position:relative;width:120px;height:90px;margin:50px;background:#d8000f;background:rgba(216,0,15,.8);border-radius:50% 50%;-webkit-transform-origin:50% -100px;-webkit-animation:swing 3s infinite ease-in-out;box-shadow:-5px 5px 50px 4px #fa6c00}.deng-a{width:100px;height:90px;background:#d8000f;background:rgba(216,0,15,.1);margin:12px 8px 8px 8px;border-radius:50% 50%;border:2px solid #dc8f03}.deng-b{width:45px;height:90px;background:#d8000f;background:rgba(216,0,15,.1);margin:-4px 8px 8px 26px;border-radius:50% 50%;border:2px solid #dc8f03}.xian{position:absolute;top:-20px;left:60px;width:2px;height:20px;background:#dc8f03}.shui-a{position:relative;width:5px;height:20px;margin:-5px 0 0 59px;-webkit-animation:swing 4s infinite ease-in-out;-webkit-transform-origin:50% -45px;background:orange;border-radius:0 0 5px 5px}.shui-b{position:absolute;top:14px;left:-2px;width:10px;height:10px;background:#dc8f03;border-radius:50%}.shui-c{position:absolute;top:18px;left:-2px;width:10px;height:35px;background:orange;border-radius:0 0 0 5px}.deng:before{position:absolute;top:-7px;left:29px;height:12px;width:60px;content:" ";display:block;z-index:999;border-radius:5px 5px 0 0;border:solid 1px #dc8f03;background:orange;background:linear-gradient(to right,#dc8f03,orange,#dc8f03,orange,#dc8f03)}.deng:after{position:absolute;bottom:-7px;left:10px;height:12px;width:60px;content:" ";display:block;margin-left:20px;border-radius:0 0 5px 5px;border:solid 1px #dc8f03;background:orange;background:linear-gradient(to right,#dc8f03,orange,#dc8f03,orange,#dc8f03)}.deng-t{font-family:华文行楷,Arial,Lucida Grande,Tahoma,sans-serif;font-size:3.2rem;color:#dc8f03;font-weight:700;line-height:85px;text-align:center}.night .deng-box,.night .deng-box1,.night .deng-t{background:0 0!important}@-moz-keyframes swing{0%{-moz-transform:rotate(-10deg)}50%{-moz-transform:rotate(10deg)}100%{-moz-transform:rotate(-10deg)}}@-webkit-keyframes swing{0%{-webkit-transform:rotate(-10deg)}50%{-webkit-transform:rotate(10deg)}100%{-webkit-transform:rotate(-10deg)}}</style> 
+
+<body>
+    <mdui-switch id="dark-mode-switch" unchecked-icon="light_mode" checked-icon="dark_mode" style="float: left; margin-top: 0;margin-left: 0;"></mdui-switch>
+    <script>
+        if (mdui.getTheme() === "dark") {
+            
+            document.getElementById("dark-mode-switch").checked = true;
+
+        }
+        document.getElementById("dark-mode-switch").addEventListener("change", function() {
+            if (this.checked) {
+                mdui.setTheme("dark");
+            } else {
+                mdui.setTheme("light");
+            }
+        });
+    </script><br><br>
+    <mdui-dialog
+        headline="Hint"
+        close-on-esc
+        close-on-overlay-click
+        id="phone-dialog"
+    >
+
+        <mdui-icon slot="icon" name="phonelink_setup"></mdui-icon>
+        <p>Currently in portrait mode or the window size is too small, it is recommended to switch to landscape mode or enlarge the window to view!</p>
+        <mdui-button slot="action" variant="text" onclick="dialog_phone.open = false;">OK</mdui-button>
+
+    </mdui-dialog>
+    <script>
+        const dialog_phone = document.querySelector('#phone-dialog');
+        function detectOrientation() {
+            // 使用window.matchMedia检测屏幕方向
+            if (window.matchMedia("(orientation: portrait)").matches) {
+                dialog_phone.open = true;
+            } else {
+                dialog_phone.open = false;
+            }
+        
+        }
+
+        // 添加事件监听器，当屏幕方向改变时触发
+        window.addEventListener("resize", detectOrientation);
+
+        // 页面加载时检测初始方向
+        detectOrientation();
+
+
+    </script>
+
+    <mdui-fab icon="language" class="lang-select" href="lang.html"></mdui-fab>
+    
+    <audio id="myAudio" autoplay>
+        <source id="audioSource" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <mdui-fab icon="music_note" onclick="togglePlay()" id="audioControl" style="position: fixed;top: 20px;right: 20px;z-index: 114514;"></mdui-fab>
+
+    <script>
+        // 定义音乐文件路径数组
+        var musicFiles = [
+            "庆祝时刻1.mp3",
+            "庆祝时刻2.mp3",
+            "喜庆的时光.mp3"
+        ];
+        
+        // 获取音频元素和按钮
+        var audio = document.getElementById("myAudio");
+        var audioSource = document.getElementById("audioSource");
+        var button1 = document.getElementById("audioControl");
+        
+        // 当前播放的音乐索引
+        var currentMusicIndex = -1;
+        
+        // 播放下一首随机音乐的函数
+        function playNextRandomMusic() {
+            // 获取一个新的随机索引，确保不重复
+            do {
+                var newIndex = Math.floor(Math.random() * musicFiles.length);
+            } while (newIndex === currentMusicIndex);
+        
+            // 更新当前播放的音乐索引
+            currentMusicIndex = newIndex;
+        
+            // 设置新的音乐文件路径
+            audioSource.src = musicFiles[currentMusicIndex];
+            audio.load(); // 重新加载音频文件
+        
+            // 尝试播放音频
+            audio.play().then(() => {
+                console.log("音频播放成功");
+            }).catch((error) => {
+                console.error("音频播放失败: ", error);
+                button1.icon = "music_off";
+                mdui.alert({
+                    icon: "volume_off",
+                    headline: "Festival music autoplay blocked",
+                    description: "Please play manually through the button in the upper right corner.",
+                    confirmText: "OK",
+                    onConfirm: () => console.log("confirmed"),
+                    });
+                 // 这里可以添加处理逻辑，比如提示用户
+            });
+        }
+
+        // 切换播放状态的函数
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    button1.icon = "music_note";
+                }).catch((error) => {
+                    console.error("尝试播放音频失败: ", error);
+                    // 这里可以添加处理逻辑，比如提示用户
+                });
+            } else {
+                audio.pause();
+                button1.icon = "music_off";
+            }
+        }
+        
+         // 当音频结束时，播放下一首随机音乐
+         audio.addEventListener("ended", playNextRandomMusic);
+         
+         // 初始化时播放第一首随机音乐
+         playNextRandomMusic();
+         
+         // 添加 canplay 事件监听器
+         audio.addEventListener("canplay", function() {
+             console.log("音频可以播放");
+            //  playNextRandomMusic();
+         });
+         
+         // 添加 error 事件监听器
+         audio.addEventListener("error", function(event) {
+             console.error("音频加载或播放出错: ", event.target.error.code, event.target.error.message);
+             // 这里可以添加处理逻辑，比如提示用户音频加载失败或被浏览器拦截
+         });
+     </script>
+
+
+    <header style="margin: 0 auto;text-align: center;padding: 10px 0;">
+        <img class="logo" src="http://cdnjson.com/images/2024/10/31/remove.photos-removed-background.png" alt="小树壁纸Logo">
+        <h1>Xiaoshu Wallpaper</h1>
+        <p>Enhance your desktop experience</p>
+    </header>
+
+    <main>
+        
+        
+        <mdui-tabs value="tab-1" placement="top" autofocus>
+            <mdui-tab value="tab-1" icon="home" >5.1 Official Version</mdui-tab>
+            <mdui-tab value="tab-2" icon="auto_awesome">6.0 Development Version<mdui-badge slot="badge">New!</mdui-badge></mdui-tab>
+            <mdui-tab value="tab-3" icon="code">Next Plan<mdui-badge variant="small"></mdui-badge></mdui-tab>
+          
+            <mdui-tab-panel slot="panel" value="tab-1">
+                    <!-- <mdui-button></mdui-button> -->
+                    <mdui-dialog headline="Before downloading the program, please read the following agreement carefully:" description="Version 1.0, December 2024"
+                    close-on-overlay-click class="dialog-license">
+                    <div class="mdui-prose">
+                        <div class="mdui-prose" style="text-align: initial">
+                            <p style="text-align: center"><strong>Xiaoshu Wallpaper v5.1.0 User Agreement<br></strong></p>
+                            <p>Welcome to Xiaoshu Wallpaper. Before downloading and using our software, please read the following agreement carefully:</p>
+                            
+                            <ol>
+                                <li>This software is free to use, and no individual or organization may use it for commercial purposes.</li>
+                                <li>All wallpapers provided by this software are derived from the Internet, and the copyright belongs to the original author. Xiaoshu Wallpaper is not responsible for its content.</li>
+                                <li>This software does not contain any form of advertising or any other form of commercial promotion.</li>
+                                <li>Users who find any problems during use can report to us through official channels.</li>
+                                <li>We will not collect any user information, nor will we disclose any user privacy.</li>
+                                <li>If our software violates your legitimate rights and interests, please contact us immediately and we will remove the relevant content as soon as possible.</li>
+                                <li>This Agreement is valid to the extent permitted by law and may be updated at any time.</li>
+                                <li>This agreement is only applicable to version V5.1.0 of Xiaoshu Wallpaper. For other versions of the agreement, please refer to the corresponding version agreement.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <mdui-button slot="action" variant="text">Disagree</mdui-button>
+                
+                    
+
+                    <mdui-button icon="download_done" slot="action" variant="tonal" id="download-button-agree"
+                    href="https://api.leafone.cn/api/lanzou?url=https://wwo.lanzouo.com/iIPRF21vclad&pwd=1234&type=down" download="https://api.leafone.cn/api/lanzou?url=https://wwo.lanzouo.com/iIPRF21vclad&pwd=1234&type=down">Agree and Download</mdui-button>
+
+                    
+                </mdui-dialog>
+
+                <mdui-tooltip
+                variant="rich"
+                headline="Download v5.1.0 stable version of Xiaoshu Wallpaper"
+                content="Updated in 2024-06-15">
+                    <mdui-button icon="download" id="download-button" style="display: block;margin: auto;width: 130px;margin-top: 10px;">Download</mdui-button>
+                </mdui-tooltip>
+                <mdui-tooltip
+                variant="rich"
+                headline="Get the source code"
+                content="Click to go to the Github repository to get the source code of the Xiaoshu wallpaper v5.1.0">
+                    <mdui-button variant="text" icon="code" style="display: block;margin: auto;width: 200px;margin-top: 10px;" href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/tree/5.1" target="_blank">Get the source code</mdui-button>
+                </mdui-tooltip>
+              <mdui-snackbar class="example-action" action="Learn more" closeable>The main life cycle of the Xiaoshu Wallpaper 5.0 series has ended</mdui-snackbar>
+                
+              <script>
+                const dialog = document.querySelector(".dialog-license");
+                const snackbar = document.querySelector(".example-action");
+                const openButton = document.getElementById("download-button");
+            
+                // 绑定按钮点击事件
+                openButton.addEventListener("click", () => {
+                    // 打开弹窗
+                    dialog.open = true;
+            
+                    // 显示 snackbar
+                    snackbar.open = true;
+            
+                    // 添加点击 Snackbar 动作的逻辑处理（如果需要）
+                    snackbar.addEventListener("action-click", () => {
+                        snackbar.actionLoading = true;
+                        setTimeout(() => {
+                            snackbar.actionLoading = false;
+                            console.log("Snackbar 动作已完成"); // 可替换为实际逻辑
+                        }, 2000);
+                    });
+                });
+            
+                // 关闭弹窗逻辑
+                const closeButton = dialog.querySelector("mdui-button");
+                closeButton.addEventListener("click", () => dialog.open = false);
+            </script>
+                <div class="mdui-prose" style="text-align: center;margin-top: 5px;">Promotional video/screenshot</div>
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-item active">
+                            <video controls>
+                                <source src="https://www.jikexinao.com/api/public/file/318f3fe4a60f41eca31f2c478fc1d5a4.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/5.1/image1.png" alt="Image 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/5.1/image2.png" alt="Image 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/5.1/image3.png" alt="Image 3">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/5.1/image4.png" alt="Image 4">
+                        </div>
+                        
+                        <div class="carousel-controls">
+                            <mdui-button-icon id="prevBtn" icon="arrow_back"></mdui-button-icon>
+                            <mdui-button-icon id="nextBtn" icon="arrow_forward"></mdui-button-icon>
+
+                        </div>
+                    </div>
+                </div>            
+
+                            <style>
+                                #snackbar-button {                                
+                                    margin-top: 10px;
+                                }
+                                
+                            </style>
+                            <mdui-snackbar class="feature-snackbar" closeable>Feature: New features, themes, settings, etc. added in the current version</mdui-snackbar>   
+                            <mdui-snackbar class="refactor-snackbar" closeable>Refactor: Code structure, function implementation, interface design, etc. rewritten in the current version</mdui-snackbar>     
+                            <mdui-snackbar class="fix-snackbar" closeable>Fix: Bugs, defects, vulnerabilities, etc. fixed in the current version</mdui-snackbar>                          
+                            <div class="mdui-prose" style="margin-left: 20px;margin-top: 20px; text-align: center;">
+
+                                
+                                <h2><mdui-icon name="sticky_note_2 " style="font-size: 1em;"></mdui-icon> Xiaoshu Wallpapers v5.1 Update Log </h2>
+                                
+
+                                    <mdui-chip id="snackbar-button" class="feature-button">Feature</mdui-chip><br> Window background switching (requires enabling the unverified preview setting item)<br>
+
+                                    <mdui-chip id="snackbar-button" class="feature-button">Feature</mdui-chip><br> Refresh theme<br>
+
+                                    <mdui-chip id="snackbar-button" class="feature-button">Feature</mdui-chip><br> High DPI adaptation<br>
+
+                                    <mdui-divider></mdui-divider>
+                                    <mdui-chip id="snackbar-button" class="refactor-button">Refactor</mdui-chip><br> Title bar<br>
+
+                                    <mdui-chip id="snackbar-button" class="refactor-button">Refactor</mdui-chip><br> Settings<br>
+
+                                    <mdui-divider></mdui-divider>
+                                    <mdui-chip id="snackbar-button" class="fix-button">Fix</mdui-chip><br> Unable to normally capture update exceptions<br>
+
+                                    <mdui-chip id="snackbar-button" class="fix-button">Fix</mdui-chip><br> Unable to normally capture data acquisition exceptions from Bing source<br>
+
+                                    <mdui-chip id="snackbar-button" class="fix-button">Fix</mdui-chip><br> Unable to normally capture download exceptions<br>
+
+                    
+                                </ol>
+                                <h3>Incompatible Update</h3>
+                                <p>
+                                    Modified the configuration file format from json to json5, and the update will result in loss of all configurations
+                                </p>
+
+                                <h3>Known Issues</h3>
+                                <p>
+                                    Using a custom window background will be obscured by the white background of the interface, so you need to enable the unverified preview setting item first to use it
+                                </p>
+                                
+
+                            </div>
+                            <script>
+                                const snackbar1 = document.querySelector(".feature-snackbar");
+                                const featureButtons1 = document.querySelectorAll(".feature-button");
+                            
+                                featureButtons1.forEach(button => {
+                                    button.addEventListener("click", () => {
+                                        snackbar1.open = true;
+                                    });
+                                });
+
+                                const snackbar2 = document.querySelector(".refactor-snackbar");
+                                const featureButtons2 = document.querySelectorAll(".refactor-button");
+                            
+                                featureButtons2.forEach(button => {
+                                    button.addEventListener("click", () => {
+                                        snackbar2.open = true;
+                                    });
+                                });
+
+                                const snackbar3 = document.querySelector(".fix-snackbar");
+                                const featureButtons3 = document.querySelectorAll(".fix-button");                            
+                                featureButtons3.forEach(button => {
+                                    button.addEventListener("click", () => {
+                                        snackbar3.open = true;
+                                    });
+                                });
+
+
+                            </script>
+
+                
+                <script>
+                    let currentIndex = 0;
+                    const items = document.querySelectorAll('.carousel-item');
+                
+                    function updateCarousel() {
+                        items.forEach((item, index) => {
+                            item.classList.remove('active');
+                            if (index === currentIndex) {
+                                item.classList.add('active');
+                                // 如果当前项是视频，确保视频不会暂停
+                                const video = item.querySelector('video');
+                                if (video) {
+                                    video.play(); // 播放视频
+                                }
+                            } else {
+                                const video = item.querySelector('video');
+                                if (video) {
+                                    video.pause(); // 其他项暂停视频
+                                }
+                            }
+                        });
+                    }
+                
+                    document.getElementById('prevBtn').addEventListener('click', () => {
+                        currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+                        updateCarousel();
+                    });
+                
+                    document.getElementById('nextBtn').addEventListener('click', () => {
+                        currentIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+                        updateCarousel();
+                    });
+                
+                    // 默认不播放视频
+                    const video = document.querySelector('video');
+                    video.pause();  // 确保视频不自动播放
+                </script>
+
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="tab-2">
+                <mdui-dialog headline="Before downloading the program, please read the following agreement carefully:" description="Version 1.0, December 2024"
+                close-on-overlay-click class="dialog-6">
+                    <div class="mdui-prose">
+                        <div class="mdui-prose" style="text-align: initial">
+                            <p style="text-align: center"><strong>Xiaoshu Wallpaper v6.0.0 series test version Universal User Protocol<br></strong></p>
+                            <p>Welcome to Xiaoshu Wallpaper Test. Please read the following agreement carefully before downloading and using our software:</p>
+                            
+                            <ol>
+                                <li>This software is open source under the <a href = "https://www.gnu.org/licenses/agpl-3.0.en.html#license-text" > AGPLv3</a> license, no individual or organization may use this software for commercial purposes, please abide by the open source agreement.</li>
+                                <li>All wallpapers provided by this software are derived from the Internet, and the copyright belongs to the original author. Xiaoshu Wallpaper is not responsible for its content.</li>
+                                <li>This software will not upload any user data to the server, nor will it collect any user information, nor will it disclose any user privacy.</li>
+                                <li>This software does not contain any form of advertising or any other form of commercial promotion.</li>
+                                <li>The wallpaper in this software is for personal use only. Do not use it for commercial purposes.</li>
+                                <li>Users who find any problems during use can report to us through official channels.</li>
+                                <li>We will not collect any user information, nor will we disclose any user privacy.</li>
+                                <li>If our software violates your legitimate rights and interests, please contact us immediately and we will remove the relevant content as soon as possible.</li>
+                                <li>This Agreement is valid to the extent permitted by law and may be updated at any time.</li>
+                                <li>This agreement is only applicable to the test version of Xiaoshu Wallpaper V6.0.0 series. For other versions of the agreement, please refer to the corresponding version agreement.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <mdui-button slot="action" variant="text">Disagree</mdui-button>
+
+                    <mdui-button icon="download_done" slot="action" variant="tonal" id="download-button-agree"
+                    href="https://gh.llkk.cc/https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/download/6rc1/xiaoshu.wallpaper.v6.0.0-rc.1.windows.x64.zip" download="https://gh.llkk.cc/https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/download/6rc1/xiaoshu.wallpaper.v6.0.0-rc.1.windows.x64.zip">Agree and Download</mdui-button>
+
+                
+                </mdui-dialog>
+
+                <mdui-dialog headline="Before downloading the program, please read the following agreement carefully:" description="Version 1.0, December 2024"
+                close-on-overlay-click class="dialog-in">
+                    <div class="mdui-prose">
+                        <div class="mdui-prose" style="text-align: initial">
+                            <p style="text-align: center"><strong>Xiaoshu Wallpaper v6.0.0 Series Test Version Universal User Agreement - International Version<br></strong></p>
+                            <p>Welcome to Xiaoshu Wallpaper Test. Please read the following agreement carefully before downloading and using our software:</p>
+                            
+                            <ol>
+                                <li>This software is open source under the <a href = "https://www.gnu.org/licenses/agpl-3.0.en.html#license-text" > AGPLv3</a> license, no individual or organization may use this software for commercial purposes, please abide by the open source agreement.</li>
+                                <li>All wallpapers provided by this software are derived from the Internet, and the copyright belongs to the original author. Xiaoshu Wallpaper is not responsible for its content.</li>
+                                <li>This software will not upload any user data to the server, nor will it collect any user information, nor will it disclose any user privacy.</li>
+                                <li>The wallpaper in this software is for personal use only. Do not use it for commercial purposes.</li>
+                                <li>This software does not contain any form of advertising or any other form of commercial promotion.</li>
+                                <li>Users who find any problems during use can report to us through official channels.</li>
+                                <li>We will not collect any user information, nor will we disclose any user privacy.</li>
+                                <li>If our software violates your legitimate rights and interests, please contact us immediately and we will remove the relevant content as soon as possible.</li>
+                                <li>This software will only comply with the laws of the Chinese mainland, and local laws cannot be used as guidelines.</li>
+                                <li>This Agreement is valid to the extent permitted by law and may be updated at any time.</li>
+                                <li>This agreement is only applicable to the test version of Xiaoshu Wallpaper V6.0.0 series. For other versions of the agreement, please refer to the corresponding version agreement.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <mdui-button slot="action" variant="text" href="lang.html">Switch language</mdui-button>
+
+                    <mdui-button slot="action" variant="text" onclick="dialog_in.open = false">Disagree</mdui-button>
+                    
+
+                    <mdui-button icon="download_done" slot="action" variant="tonal" id="download-button-agree"
+                    href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/download/6rc1/xiaoshu.wallpaper.v6.0.0-rc.1.windows.x64.zip" download="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/download/6rc1/xiaoshu.wallpaper.v6.0.0-rc.1.windows.x64.zip">Agree and Download</mdui-button>
+
+                
+                </mdui-dialog>
+                    <mdui-dropdown>
+                        <mdui-button icon="download" slot="trigger" style="display: block;margin: auto;width: 130px;margin-top: 10px;">Download</mdui-button>
+                        <mdui-menu>
+                            <mdui-menu-item id="download-zh-cn">Chinese mainland download</mdui-menu-item>
+                            <mdui-menu-item id="download-international">international download</mdui-menu-item>
+                        </mdui-menu>
+                    </mdui-dropdown>
+
+                <mdui-tooltip
+                variant="rich"
+                headline="Get the source code"
+                content="Click to go to the Github repository to get the source code of the latest version of the Xiaoshu wallpaper">
+                    <mdui-button variant="text" icon="code" style="display: block;margin: auto;width: 200px;margin-top: 10px;" href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/" target="_blank">Get the source code</mdui-button>
+                </mdui-tooltip>
+            <mdui-snackbar class="test-info" action="Learn more" closeable>The 6.0 version of the Xiaoshu wallpaper is still in the testing stage, please use it with caution!</mdui-snackbar>
+                
+            <script>
+                const dialog6 = document.querySelector(".dialog-6");
+                const snackbar6 = document.querySelector(".test-info");
+                const openButton6 = document.getElementById("download-zh-cn");
+                const openButton_in = document.getElementById("download-international");
+                const dialog_in = document.querySelector(".dialog-in");
+                openButton_in.addEventListener("click", () => {
+                    dialog_in.open = true;
+                });
+
+                // 绑定按钮点击事件
+                openButton6.addEventListener("click", () => {
+                    // 打开弹窗
+                    dialog6.open = true;
+            
+                    // 显示 snackbar
+                    snackbar6.open = true;
+            
+                    // 添加点击 Snackbar 动作的逻辑处理（如果需要）
+                    snackbar6.addEventListener("action-click", () => {
+                        snackbar6.actionLoading = true;
+                        setTimeout(() => {
+                            snackbar6.actionLoading = false;
+                            console.log("Snackbar 动作已完成"); // 可替换为实际逻辑
+                        }, 2000);
+                    });
+                });
+            
+                // 关闭弹窗逻辑
+                const closeButton6 = dialog6.querySelector("mdui-button");
+                closeButton6.addEventListener("click", () => dialog6.open = false);
+            </script>                    
+
+
+
+
+
+            <div id="content" class="mdui-prose" style="margin: 30px;">
+                
+                <blockquote> <p><strong>Hint</strong><br /> Xiaoshu Wallpaper 6.0 is still in the testing stage. For the complete update content of 6.0, please refer to:<br /> 小树壁纸 6.0 目前仍处于测试阶段，6.0 完整的更新公告请参阅：<br /> <strong><a href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/tag/6a1" target="_blank">6.0 Main update contents</a></strong><br /> <strong><a href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/releases/tag/6a1" target="_blank">6.0 主要更新内容</a></strong></p> </blockquote> <h2><a id="Updated_Content__7"></a>Updated Content 更新内容</h2> <h3><a id="_Added__9"></a>🟢 Added 新增</h3> <ul> <li>New Settings: Main Interface Layout<br /> 新设置项：主页布局</li> <li>New Settings: Home Background<br /> 新设置项：主页背景</li> <li>New Settings: Hide window title bar<br /> 新设置项：隐藏窗口标题栏</li> <li>New Settings: Top Window<br /> 新设置项：置顶窗口</li> <li>New Settings: Window Transparency Adjustment<br /> 新设置项：窗口透明度调整</li> <li>New settings page: Window<br /> 新设置页：窗口</li> </ul> <h3><a id="_Fixed__26"></a>🟠 Fixed 修复</h3> <ul> <li>Fixed an issue where setting internal partial buttons overflowed the display range<br /> 修复了设置内部分按钮溢出显示范围的问题</li> <li>Fixed an issue where the window background color was incorrect when using the special effect <code>aero</code><br /> 修复了使用特殊效果 <code>aero</code> 时窗口背景颜色不正确的问题</li> </ul> <h3><a id="_Changed__35"></a>🟡 Changed 更改</h3> <ul> <li>Update <code>tkintertools</code> to <a href="https://github.com/Xiaokang2022/tkintertools/releases/tag/3.0.0rc3" target="_blank">3.0.0rc3</a><br /> 更新 <code>tkintertools</code> 至 <a href="https://github.com/Xiaokang2022/tkintertools/releases/tag/3.0.0rc3" target="_blank">3.0.0rc3</a></li> <li>Test the updated content changes<br /> 测试更新的内容更改</li> </ul> <hr /> <p><strong>代码变更日志<br /> Full Changelog</strong><br /> <a href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper/compare/6b4...6rc1" target="_blank">https://github.com/shu-shu-1/Xiaoshu-Wallpaper/compare/6b4…6rc1</a></p>
+            </div>
+        
+
+            </mdui-tab-panel>
+            <mdui-tab-panel slot="panel" value="tab-3">
+                <mdui-button style=" display: block; margin: auto; width: 520px;margin-top: 10px;" icon="auto_awesome" href="https://github.com/shu-shu-1/Xiaoshu-Wallpaper-Next"> Go to the next version of the GitHub repository for the latest updates</mdui-button>
+            </mdui-tab-panel>
+          </mdui-tabs>
+
+</body>
+</html>
+

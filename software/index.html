@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title"></title>
+    <link rel="stylesheet" href="/css/mdui/mdui.css">
+    <script src="/js/marked.min.js"></script>
+    <script src="/js/mdui.global.js"></script>
+    <link rel="stylesheet" href="/css/mdui/icon.css">
+
+</head>
+<body>
+    <h1 id="introduce" style="margin: 20px;"></h1>
+    <mdui-card style="margin: 10px; display: flex; flex-direction: column; justify-content: space-between; max-width: 400px;">
+        <div>
+            <h2 id="Little Tree Wallpaper" style="margin: 10px;">
+            </h2>
+            <p id="Little Tree Wallpaper-desc" style="margin: 10px;"></p>
+            <br><br><br><br>
+        </div>
+        <mdui-button style="margin: 10px; align-self: flex-end;" icon="open_in_new" href="/software/wallpaper/">详情</mdui-button>
+    </mdui-card>
+
+
+     
+
+    <script>
+        // 多语言
+        var title = document.getElementById("title");
+        var introduce = document.getElementById("introduce");
+        var software1 = document.getElementById("Little Tree Wallpaper");
+        var software1desc = document.getElementById("Little Tree Wallpaper-desc");
+
+        var lang = location.search.slice(1); // 去掉问号
+        var params = new URLSearchParams("?" + lang); // 使用URLSearchParams来处理查询字符串
+        var langValue = params.get("lang"); // 提取lang的值
+        console.log(langValue);
+
+        // 手动设置语言
+        function setLang(lang) {
+            location.search = "lang=" + lang;
+        }
+        // 自动设置语言
+        
+        if (langValue == null) {
+            langValue = navigator.language; // 获取浏览器语言
+            setLang(langValue);
+        }
+
+        // 文本替换
+        if (langValue == "zh-CN") {
+            title.innerHTML = "软件";
+            introduce.innerHTML = "小树工作室/小树 的 软件";
+            software1.innerHTML = "小树壁纸";
+            software1desc.innerHTML = "一款简单的壁纸软件，可以为你的桌面增加绚丽色彩。";
+        } else if (langValue == "en-US") {
+            title.innerHTML = "Software";
+            introduce.innerHTML = "Software of Little Tree Studio/Xiaoshu";
+            software1.innerHTML = "Little Tree Wallpaper";
+        }
+
+        
+    </script>
+
+</body>
+</html>

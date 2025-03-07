@@ -2,59 +2,163 @@
 <html>
   <head>
     <title>小树的网站</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
+      :root {
+        --glass-blur: 16px;
+        --primary-color: rgba(138, 180, 248, 0.8);
+      }
+
       body {
-        background-color: #eee;
-        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(45deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-      
+
       .header {
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 20px;
-        text-align: center;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border-radius: 16px;
+        padding: 1.5rem 3rem;
+        margin: 2rem 0;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        transform: translateY(0);
+        transition: all 0.3s ease;
       }
-      
+
+      .header:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+      }
+
       .container {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        padding: 20px;
-        margin: 20px auto;
-        max-width: 600px;
-        text-align: center;
+        position: relative;
+        background: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border-radius: 24px;
+        padding: 2.5rem;
+        margin: 1rem;
+        width: 80%;
+        max-width: 680px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
       }
-      
+
+      .container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 24px;
+        background: linear-gradient(160deg, 
+          rgba(255,255,255,0.25) 0%,
+          rgba(255,255,255,0.05) 100%);
+        pointer-events: none;
+      }
+
       .button-container {
         display: flex;
         justify-content: center;
-        margin-top: 50px;
+        margin-top: 2.5rem;
+        gap: 1.5rem;
       }
 
       .button {
-        background-color: #0099ff;
-        color: #fff;
+        background: linear-gradient(135deg, var(--primary-color), rgba(100, 149, 237, 0.8));
+        color: white;
         border: none;
-        padding: 10px 30px;
-        border-radius: 20px;
-        box-shadow: 0 5px 10px rgba(0, 153, 255, 0.4);
+        padding: 12px 36px;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 1.1rem;
         cursor: pointer;
-        font-size: 18px;
         transition: all 0.3s ease;
-		text-decoration: none; /* 去掉超链接的下划线 */
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        text-decoration: none;
+      }
+
+      .button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255,255,255,0.3),
+          transparent
+        );
+        transition: all 0.6s ease;
       }
 
       .button:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 153, 255, 0.6);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(138, 180, 248, 0.4);
+      }
+
+      .button:hover::before {
+        left: 100%;
+      }
+
+      p {
+        color: rgba(0, 0, 0, 0.8);
+        line-height: 1.6;
+        font-weight: 300;
+        margin: 1.5rem 0;
+      }
+
+      a {
+        color: #2a6df5;
+        text-decoration: none;
+        position: relative;
+      }
+
+      a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: currentColor;
+        transition: width 0.3s ease;
+      }
+
+      a:hover::after {
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: 90%;
+          padding: 1.5rem;
+        }
+        
+        .header {
+          padding: 1rem 2rem;
+        }
       }
     </style>
   </head>
   <body>
     <div class="header">
-      <h1>这里是小树的网站</h1>
+      <h1>🌿 小树的网站</h1>
     </div>
     
     <div class="container">

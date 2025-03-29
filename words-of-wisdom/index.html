@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧之言 | 随机名言生成器</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6b8cae;
+            --accent-color: #ff7e5f;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --text-light: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7fa;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #ff6a45;
+        }
+
+        .quote-container {
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .quote-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .quote-text::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 3rem;
+            color: rgba(74, 111, 165, 0.2);
+            line-height: 1;
+        }
+
+        .quote-detail {
+            color: var(--text-light);
+            font-style: italic;
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1rem;
+            margin-top: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .language-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 0.5rem 0;
+            min-width: 120px;
+            z-index: 10;
+            display: none;
+        }
+
+        .language-menu.show {
+            display: block;
+            z-index: 1000; /* 原值为默认，需提升到更高层级 */
+        }
+
+        .language-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(74, 111, 165, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .language-switcher {
+                align-self: flex-end;
+            }
+        }
+
+        /* 图片生成样式 */
+        .quote-image-container {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 800px;
+            padding: 3rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .quote-image-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .quote-image-text {
+            font-size: 2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .quote-image-text::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            font-size: 4rem;
+            color: rgba(74, 111, 165, 0.2);
+            line-height: 1;
+        }
+
+        .quote-image-detail {
+            color: var(--text-light);
+            font-style: italic;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .quote-image-footer {
+            margin-top: 3rem;
+            text-align: right;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>智慧之言</h1>
+            <p class="subtitle">探索随机名言，启迪心灵</p>
+        </header>
+
+        <div class="card">
+            <div class="form-group">
+                <label for="topic">输入主题（可选）</label>
+                <input type="text" id="topic" placeholder="例如：爱情、人生、成功...">
+            </div>
+
+            <div class="language-switcher">
+                <button class="language-btn" id="languageBtn">
+                    <span id="currentLanguage">中文</span>
+                    <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="language-menu" id="languageMenu">
+                    <div class="language-option" data-lang="中文">中文</div>
+                    <div class="language-option" data-lang="English">English</div>
+                    <div class="language-option" data-lang="日本語">日本語</div>
+                    <div class="language-option" data-lang="Español">Español</div>
+                    <div class="language-option" data-lang="Français">Français</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card quote-container" id="quoteContainer">
+            <p class="quote-text" id="quoteText">点击下方按钮获取随机名言</p>
+            <p class="quote-detail" id="quoteDetail"></p>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-accent" id="getQuoteBtn">获取名言</button>
+            <div class="language-switcher">
+                <button class="language-btn" id="shareBtn">
+                    分享图片
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 5.12548 15.0077 5.24917 15.0227 5.37061L8.0826 9.84066C7.54305 9.32015 6.8089 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15C6.8089 15 7.54305 14.6799 8.0826 14.1593L15.0227 18.6294C15.0077 18.7508 15 18.8745 15 19C15 20.6569 16.3431 22 18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C17.1911 16 16.457 16.3201 15.9174 16.8407L8.9773 12.3706C8.99225 12.2492 9 12.1255 9 12C9 11.8745 8.99225 11.7508 8.9773 11.6294L15.9174 7.15934C16.457 7.67985 17.1911 8 18 8Z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 智慧之言 | 使用 AI 生成的名言</p>
+        </footer>
+    </div>
+
+    <!-- 用于生成图片的隐藏容器 -->
+    <div id="imageTemplate" class="quote-image-container">
+        <div class="quote-image-content">
+            <p class="quote-image-text" id="imageQuoteText"></p>
+            <p class="quote-image-detail" id="imageQuoteDetail"></p>
+            <div class="quote-image-footer">—— 来自「智慧之言」</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const getQuoteBtn = document.getElementById('getQuoteBtn');
+            const quoteText = document.getElementById('quoteText');
+            const quoteDetail = document.getElementById('quoteDetail');
+            const topicInput = document.getElementById('topic');
+            const languageBtn = document.getElementById('languageBtn');
+            const languageMenu = document.getElementById('languageMenu');
+            const currentLanguage = document.getElementById('currentLanguage');
+            const shareBtn = document.getElementById('shareBtn');
+            
+            // 图片生成相关元素
+            const imageTemplate = document.getElementById('imageTemplate');
+            const imageQuoteText = document.getElementById('imageQuoteText');
+            const imageQuoteDetail = document.getElementById('imageQuoteDetail');
+            
+            let selectedLanguage = '中文';
+            let currentQuote = '';
+            let currentDetail = '';
+            
+            // 切换语言菜单显示
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageMenu.classList.toggle('show');
+            });
+            
+            // 选择语言
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    selectedLanguage = this.getAttribute('data-lang');
+                    currentLanguage.textContent = selectedLanguage;
+                    languageMenu.classList.remove('show');
+                });
+            });
+            
+            // 点击其他地方关闭菜单
+            document.addEventListener('click', function() {
+                languageMenu.classList.remove('show');
+            });
+            
+            // 获取名言
+            getQuoteBtn.addEventListener('click', function() {
+                const topic = topicInput.value.trim();
+                const randomNum = Math.floor(Math.random() * 1000000);
+                
+                // 显示加载状态
+                getQuoteBtn.disabled = true;
+                getQuoteBtn.innerHTML = '获取中 <span class="loading"></span>';
+                
+                // 构建API URL
+                let apiUrl = `https://text.pollinations.ai/你是一个提供随机一言的文本生成器，主题是${topic || '随机'}，语言是${selectedLanguage}，请你以json格式返回（不包含代码块），格式：{text:"文字",detail:"解释"}，防止重复：${randomNum}`;
+                
+                // 编码URL
+                apiUrl = encodeURI(apiUrl);
+                
+                fetch(apiUrl)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('网络响应不正常');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        quoteText.textContent = data.text || '未能获取名言，请重试';
+                        quoteDetail.textContent = data.detail || '';
+                        currentQuote = data.text;
+                        currentDetail = data.detail || '';
+                        
+                        // 恢复按钮状态
+                        getQuoteBtn.disabled = false;
+                        getQuoteBtn.textContent = '获取名言';
+                    })
+                    .catch(error => {
+                        console.error('获取名言失败:', error);
+                        quoteText.textContent = '获取名言失败，请重试';
+                        quoteDetail.textContent = '';
+                        
+                        // 恢复按钮状态
+                        getQuoteBtn.disabled = false;
+                        getQuoteBtn.textContent = '获取名言';
+                    });
+            });
+            
+            // 分享图片功能
+            shareBtn.addEventListener('click', async function() {
+                if (!currentQuote) {
+                    alert('请先获取一条名言再分享');
+                    return;
+                }
+                
+                // 更新图片模板内容
+                imageQuoteText.textContent = currentQuote;
+                imageQuoteDetail.textContent = currentDetail;
+                
+                // 显示加载状态
+                shareBtn.disabled = true;
+                shareBtn.innerHTML = '生成中 <span class="loading"></span>';
+                
+                try {
+                    // 使用html2canvas生成图片
+                    const canvas = await html2canvas(imageTemplate, {
+                        backgroundColor: null,
+                        scale: 2, // 提高分辨率
+                        logging: false,
+                        useCORS: true
+                    });
+                    
+                    // 转换为图片并下载
+                    const image = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.download = '智慧之言.png';
+                    link.href = image;
+                    link.click();
+                    
+                } catch (error) {
+                    console.error('生成图片失败:', error);
+                    alert('生成图片失败，请重试');
+                } finally {
+                    // 恢复按钮状态
+                    shareBtn.disabled = false;
+                    shareBtn.innerHTML = '分享图片 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 5.12548 15.0077 5.24917 15.0227 5.37061L8.0826 9.84066C7.54305 9.32015 6.8089 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15C6.8089 15 7.54305 14.6799 8.0826 14.1593L15.0227 18.6294C15.0077 18.7508 15 18.8745 15 19C15 20.6569 16.3431 22 18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C17.1911 16 16.457 16.3201 15.9174 16.8407L8.9773 12.3706C8.99225 12.2492 9 12.1255 9 12C9 11.8745 8.99225 11.7508 8.9773 11.6294L15.9174 7.15934C16.457 7.67985 17.1911 8 18 8Z" fill="currentColor"/></svg>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

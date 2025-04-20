@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>古韵诗词</title>
+    <style>
+        @font-face {
+            font-family: 方正楷体;
+            src: url("https://example.com/fonts/FZKTJW.ttf");
+        }
+        
+        /* 国风背景设置 */
+        body {
+            background: 
+                /* 宣纸纹理背景 */
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57 13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"),
+                /* 水墨背景图 */
+                url("https://example.com/images/chinese-ink-bg.jpg");
+            background-size: auto, cover;
+            background-repeat: repeat, no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative; /* 为分享按钮定位添加 */
+        }
+
+        /* 诗词容器 - 仿古卷轴效果 */
+        .poem-container {
+            background-color: rgba(255, 248, 220, 0.85);
+            /* 添加宣纸杂质纹理 */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 20px 20px, 20px 20px, 10px 10px;
+            border: 12px solid transparent;
+            border-image: url('https://example.com/images/scroll-border.png') 30 round;
+            padding: 40px 60px;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 添加宣纸边缘不规则效果 */
+        .poem-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%),
+                linear-gradient(0deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* 诗词内容样式 */
+        .poem {
+            font-family: "方正楷体", "楷体", serif;
+            font-size: 28px;
+            color: #5C3317;
+            text-align: center;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        /* 出处信息样式 */
+        .source {
+            font-family: "方正楷体", "楷体", serif;
+            font-size: 18px;
+            color: #8B4513;
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+            position: relative;
+        }
+
+        /* 分享按钮样式 - 现在放在网页右下角 */
+        .share-btn {
+            position: fixed; /* 改为fixed定位 */
+            right: 30px;
+            bottom: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(139, 69, 19, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+        }
+
+        .share-btn:hover {
+            background-color: rgba(139, 69, 19, 0.95);
+            transform: scale(1.1);
+        }
+
+        .share-btn::before {
+            content: "⇊";
+            font-size: 24px;
+            color: #FFF8DC;
+        }
+
+        /* 添加墨迹效果 */
+        .ink-blot {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* 随机墨迹位置 */
+        .ink-blot:nth-child(1) {
+            top: 10%;
+            left: 15%;
+            transform: rotate(15deg) scale(0.8);
+        }
+        .ink-blot:nth-child(2) {
+            bottom: 20%;
+            right: 10%;
+            transform: rotate(-10deg) scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="poem-container">
+        <!-- 添加墨迹效果 -->
+        <div class="ink-blot"></div>
+        <div class="ink-blot"></div>
+        
+        <div class="poem">
+            <!-- 诗词内容 -->
+            <p id="poemContent">正在获取诗词...</p>
+        </div>
+
+        <div class="source" id="poemSource">
+            <!-- 诗词出处 -->
+        </div>
+    </div>
+
+    <!-- 分享按钮 - 现在放在body内，固定在网页右下角 -->
+    <div class="share-btn" id="shareBtn" title="保存为图片"></div>
+
+    <script type="text/javascript">
+        // 获取诗词数据
+        fetch('https://v1.hitokoto.cn/?c=i')
+            .then(response => response.json())
+            .then(data => {
+                // 填充诗词内容
+                document.getElementById("poemContent").textContent = data.hitokoto;
+                
+                // 处理出处信息
+                const author = data.from_who ? data.from_who : "佚名";
+                const source = data.from ? data.from : "未知";
+                document.getElementById("poemSource").textContent = `—— ${author} · ${source}`;
+            })
+            .catch(error => {
+                console.error('获取诗词失败:', error);
+                document.getElementById("poemContent").textContent = "诗词加载失败";
+                
+                // 添加加载失败时的特殊效果
+                document.querySelector('.poem-container').style.backgroundImage += 
+                    ", linear-gradient(rgba(255,0,0,0.05), rgba(255,0,0,0.05))";
+            });
+
+        // 修复后的动态墨迹效果
+        document.addEventListener('mousemove', function(e) {
+            const container = document.querySelector('.poem-container');
+            const containerRect = container.getBoundingClientRect();
+            
+            // 计算相对于容器的坐标
+            const x = e.clientX - containerRect.left;
+            const y = e.clientY - containerRect.top;
+            
+            // 确保墨迹在容器内
+            if (x >= 0 && y >= 0 && x <= containerRect.width && y <= containerRect.height) {
+                const ink = document.createElement('div');
+                ink.className = 'ink-blot';
+                ink.style.left = (x - 50) + 'px';
+                ink.style.top = (y - 50) + 'px';
+                ink.style.opacity = Math.random() * 0.2;
+                ink.style.transform = `rotate(${Math.random() * 360}deg) scale(${0.5 + Math.random()})`;
+                container.appendChild(ink);
+                
+                // 自动消失
+                setTimeout(() => {
+                    ink.style.opacity = 0;
+                    ink.style.transition = 'opacity 2s';
+                    setTimeout(() => ink.remove(), 2000);
+                }, 1000);
+            }
+        });
+
+        // 分享按钮点击事件 - 生成图片
+        document.getElementById('shareBtn').addEventListener('click', function() {
+            const container = document.querySelector('.poem-container');
+            
+            // 使用html2canvas库生成图片
+            if (typeof html2canvas !== 'undefined') {
+                html2canvas(container, {
+                    backgroundColor: null,
+                    scale: 2, // 提高生成图片质量
+                    logging: false,
+                    useCORS: true
+                }).then(canvas => {
+                    // 创建下载链接
+                    const link = document.createElement('a');
+                    link.download = '古风诗词.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            } else {
+                alert('请先引入html2canvas库');
+                console.log('如需使用生成图片功能，请引入html2canvas库');
+            }
+        });
+    </script>
+    
+    <!-- 引入html2canvas库 -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>

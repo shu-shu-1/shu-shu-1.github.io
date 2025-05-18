@@ -1,0 +1,185 @@
+/* 基本重置和全局样式 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px; /* 左右内边距，防止内容贴边 */
+}
+
+/* 头部样式 (Logo/标题) */
+header {
+    background-color: #fff;
+    color: #333;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* 主要内容区域样式 */
+main {
+    padding: 40px 0;
+}
+
+.file-item {
+    background-color: #fff;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.file-item h2 {
+    margin-top: 0;
+    color: #0056b3; /* 可以选择一个品牌色 */
+    font-size: 1.5em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* 预览区域样式 */
+.preview-area {
+    width: 100%;
+    height: 600px; /* 预览区域的默认高度，可根据需要调整 */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    overflow: hidden; /* 隐藏可能出现的滚动条 */
+    background-color: #eee; /* 预览加载前的背景 */
+    text-align: center; /* 居中文本 */
+    line-height: 600px; /* 使 fallback 文本垂直居中 */
+}
+
+.preview-area iframe {
+    width: 100%;
+    height: 100%;
+    display: block; /* 移除 iframe 底部的空白 */
+}
+
+.preview-area p {
+     /* fallback message style */
+    line-height: initial; /* Reset line-height for text */
+    padding-top: 50%; /* Push text down a bit */
+    transform: translateY(-50%); /* Vertically center text */
+}
+
+
+/* 下载链接样式 */
+.download-link a {
+    display: inline-block; /* 使链接可以设置内边距和外边距 */
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.download-link a:hover {
+    background-color: #0056b3;
+}
+
+/* 底部样式 (版权信息) */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    main {
+        padding: 20px 0;
+    }
+
+    .file-item {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .file-item h2 {
+        font-size: 1.3em;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+    .preview-area {
+        height: 400px; /* 手机视图下降低预览高度 */
+        line-height: 400px; /* Adjust fallback text centering */
+    }
+     .preview-area p {
+         padding-top: 50%;
+         transform: translateY(-50%);
+         line-height: initial;
+     }
+
+    .download-link a {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    footer {
+        padding: 15px 0;
+    }
+     footer p {
+        font-size: 0.8em;
+     }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    header h1 {
+        font-size: 1.6em;
+    }
+
+     .file-item {
+        padding: 15px;
+     }
+
+     .file-item h2 {
+        font-size: 1.2em;
+     }
+
+    .preview-area {
+        height: 300px; /* 更小的设备上进一步降低高度 */
+         line-height: 300px; /* Adjust fallback text centering */
+    }
+     .preview-area p {
+         padding-top: 50%;
+         transform: translateY(-50%);
+         line-height: initial;
+     }
+
+    .download-link a {
+        display: block; /* 在小屏幕上让下载按钮独占一行 */
+        text-align: center;
+        margin-top: 10px;
+    }
+}

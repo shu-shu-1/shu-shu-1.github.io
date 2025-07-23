@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小树工作室 - 精品图片展示</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #4895ef;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        header {
+            background: linear-gradient(90deg, rgba(67,97,238,0.95) 0%, rgba(72,149,239,0.95) 100%);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+
+        .logo i {
+            color: #4cc9f0;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .categories {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            margin: 30px auto 20px;
+            max-width: 95%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .category-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 50px;
+            background: var(--light);
+            color: var(--gray);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .category-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.03);
+        }
+
+        .gallery-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .gallery-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--light);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .gallery-description {
+            font-size: 0.95rem;
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .gallery-meta {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .view-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .detail-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow: auto;
+            position: relative;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .modal-img-container {
+            width: 100%;
+            height: 450px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .modal-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .modal-description {
+            color: var(--dark);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .download-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--light);
+            border: 2px solid #e0e0e0;
+            padding: 14px 25px;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            flex: 1;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .download-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .download-btn.watermark {
+            background: linear-gradient(45deg, rgba(67,97,238,0.1), rgba(72,149,239,0.1));
+            border: 2px dashed var(--primary);
+        }
+
+        .download-btn.watermark:hover {
+            background: var(--primary);
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .bg-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .bg-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .bg-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-img-container {
+                height: 350px;
+            }
+            
+            .download-btn {
+                min-width: 100%;
+            }
+            
+            .modal-info {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-tree"></i>
+                <span>小树图片集</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="categories">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-th"></i> 全部
+            </button>
+            <button class="category-btn" data-category="nature">
+                <i class="fas fa-circle"></i> 原神
+            </button>
+            <button class="category-btn" data-category="architecture">
+                <i class="fas fa-circle"></i> 崩铁
+            </button>
+            <button class="category-btn" data-category="people">
+                <i class="fas fa-circle"></i> 鸣潮
+            </button>
+            <button class="category-btn" data-category="abstract">
+                <i class="fas fa-circle"></i> Minecraft
+            </button>
+        </div>
+
+        <div class="gallery-container" id="gallery">
+            <!-- 图片项将通过JavaScript动态生成 -->
+        </div>
+    </div>
+
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-img-container">
+                <img id="modalImg" class="modal-img" src="" alt="详情图片">
+            </div>
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title">图片标题</h2>
+                <div class="modal-info">
+                    <span class="badge" id="modalCategory">分类</span>
+                    <span class="badge bg-secondary" id="modalSize">尺寸</span>
+                    <span class="badge bg-accent" id="modalDate">日期</span>
+                </div>
+            </div>
+            <p id="modalDescription" class="modal-description">图片描述</p>
+            <div class="download-actions">
+                <a href="#" class="download-btn" id="downloadBtn">
+                    <i class="fas fa-download"></i> 下载原图
+                </a>
+                <a href="#" class="download-btn watermark" id="watermarkFreeBtn" style="display: none;">
+                    <i class="fas fa-tint"></i> 下载无水印版
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 小树工作室 | 用心创作每一张图片</p>
+    </div>
+
+    <script>
+        // 图片数据
+        const images = [
+            {
+                id: 1,
+                title: "山间日出",
+                description: "清晨时分，太阳刚刚升起，金色的阳光洒在山峦之间，薄雾弥漫在谷底，创造出一幅梦幻般的自然画卷。",
+                category: "nature",
+                size: "6000×4000",
+                date: "2023-05-15",
+                url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bmF0dXJlLG1vdW50YWlufHx8fHx8MTY4Nzk4NTAyNQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200",
+                downloadUrl: "#",
+                hasWatermark: true,
+                watermarkFreeUrl: "#"
+            },
+            {
+                id: 2,
+                title: "现代都市夜景",
+                description: "繁华都市的夜景，高楼林立，灯光璀璨，展现出城市现代化的壮丽景观。",
+                category: "architecture",
+                size: "5472×3648",
+                date: "2023-04-22",
+                url: "https://images.unsplash.com/photo-1496564203457-11d120ed6598?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y2l0eSxuaWdodHx8fHx8fDE2ODc5ODUwMjY&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200",
+                downloadUrl: "#",
+                hasWatermark: false
+            },
+            {
+                id: 3,
+                title: "街头摄影师",
+                description: "雨后的街道，一位专注的摄影师正在拍摄城市风景，雨伞和相机形成鲜明的构图。",
+                category: "people",
+                size: "6000×4000",
+                date: "2023-03-18",
+                url: "https://images.unsplash.com/photo-1545239351-ef35f43d514b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8cGVvcGxlLHBob3RvZ3JhcGhlcnx8fHx8fDE2ODc5ODUwMjc&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200",
+                downloadUrl: "#",
+                hasWatermark: true,
+                watermarkFreeUrl: "#"
+            },
+            {
+                id: 4,
+                title: "几何抽象",
+                description: "通过光影和几何形状构成的抽象艺术，蓝色和橙色的对比创造出视觉冲击。",
+                category: "abstract",
+                size: "4000×6000",
+                date: "2023-06-10",
+                url: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8YWJzdHJhY3QscGF0dGVybnx8fHx8fDE2ODc5ODUwMjg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200",
+                downloadUrl: "#",
+                hasWatermark: false
+            },
+            {
+                id: 5,
+                title: "雪山湖泊",
+                description: "巍峨的雪山倒映在平静的湖面，清澈的湖水呈现出不同的蓝色层次，周围是稀疏的针叶林。",
+                category: "nature",
+                size: "6240×4160",
+                date: "2023-01-05",
+                url: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bW91bnRhaW4sbGFrZXx8fHx8fDE2ODc5ODUwMjg&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200",
+                downloadUrl: "#",
+                hasWatermark: true,
+                watermarkFreeUrl: "#"
+            },
+            {
+                id: 6,
+                title: "古建筑之美",
+                description: "一座历史悠久的古代建筑，精美的雕梁画栋和复杂的飞檐结构，展示了传统建筑艺术的精髓。",
+                category: "architecture",
+                size: "4928×3264",
+                date: "2023-02-28",
+                url: "https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8YXJjaGl0ZWN0dXJlLGFuY2llbnR8fHx8fHwxNjg3OTg1MDI4&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1200",
+                downloadUrl: "#",
+                hasWatermark: true,
+                watermarkFreeUrl: "#"
+            }
+        ];
+
+        // 渲染图片网格
+        function renderGallery(imagesToShow) {
+            const galleryContainer = document.getElementById('gallery');
+            galleryContainer.innerHTML = '';
+            
+            imagesToShow.forEach(image => {
+                const categoryNames = {
+                    "nature": "自然风光",
+                    "architecture": "建筑艺术",
+                    "people": "人文纪实",
+                    "abstract": "创意抽象"
+                };
+                
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" class="gallery-img">
+                    <div class="gallery-info">
+                        <h3 class="gallery-title">${image.title}</h3>
+                        <span class="gallery-category">${categoryNames[image.category]}</span>
+                        <p class="gallery-description">${image.description}</p>
+                        <div class="gallery-meta">
+                            <span>${image.size} | ${image.date}</span>
+                            <button class="view-btn" data-id="${image.id}">
+                                <i class="fas fa-eye"></i> 查看详情
+                            </button>
+                        </div>
+                    </div>
+                `;
+                galleryContainer.appendChild(item);
+            });
+            
+            // 添加事件监听器
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const imageId = this.getAttribute('data-id');
+                    const image = images.find(img => img.id === parseInt(imageId));
+                    openImageDetail(image);
+                });
+            });
+        }
+
+        // 打开图片详情模态框
+        function openImageDetail(image) {
+            const modal = document.getElementById('detailModal');
+            const categoryNames = {
+                "nature": "自然风光",
+                "architecture": "建筑艺术",
+                "people": "人文纪实",
+                "abstract": "创意抽象"
+            };
+            
+            document.getElementById('modalImg').src = image.url;
+            document.getElementById('modalTitle').textContent = image.title;
+            document.getElementById('modalCategory').textContent = categoryNames[image.category];
+            document.getElementById('modalCategory').className = 'badge bg-primary';
+            document.getElementById('modalSize').textContent = image.size;
+            document.getElementById('modalDate').textContent = image.date;
+            document.getElementById('modalDescription').textContent = image.description;
+            document.getElementById('downloadBtn').href = image.downloadUrl;
+            
+            const watermarkBtn = document.getElementById('watermarkFreeBtn');
+            if (image.hasWatermark) {
+                watermarkBtn.style.display = 'flex';
+                watermarkBtn.href = image.watermarkFreeUrl;
+            } else {
+                watermarkBtn.style.display = 'none';
+            }
+            
+            modal.classList.add('active');
+        }
+
+        // 初始渲染
+        renderGallery(images);
+
+        // 类别过滤
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 更新活动状态
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                let filteredImages = images;
+                
+                if (category !== 'all') {
+                    filteredImages = images.filter(image => image.category === category);
+                }
+                
+                renderGallery(filteredImages);
+            });
+        });
+
+        // 关闭模态框
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('detailModal').classList.remove('active');
+        });
+    </script>
+</body>
+</html>

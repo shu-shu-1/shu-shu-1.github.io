@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlockX服务器规则</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            min-width: 0;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        .core-concept {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border-left: 5px solid #3498db;
+            grid-column: 1 / -1;
+        }
+
+        .toc {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            transition: all 0.3s ease;
+        }
+
+        .toc.collapsed {
+            width: 60px;
+            overflow: hidden;
+        }
+
+        .toc.collapsed .toc-content {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .toc.collapsed .toggle-btn {
+            transform: rotate(180deg);
+        }
+
+        .toc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .toc h2 {
+            color: #2c3e50;
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #3498db;
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .toc-content {
+            transition: opacity 0.3s ease;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 6px;
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: block;
+            font-size: 0.9em;
+            border-left: 3px solid transparent;
+        }
+
+        .toc a:hover, .toc a.active {
+            background: rgba(52, 152, 219, 0.1);
+            border-left-color: #3498db;
+            transform: translateX(3px);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            scroll-margin-top: 30px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin: 20px 0 10px 0;
+        }
+
+        .section h4 {
+            color: #34495e;
+            font-size: 1.1em;
+            margin: 15px 0 8px 0;
+        }
+
+        .section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .warning {
+            background: linear-gradient(120deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+
+        .success {
+            background: linear-gradient(120deg, #d4edda 0%, #c3e6cb 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #28a745;
+        }
+
+        .toggle-toc {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-toc:hover {
+            transform: scale(1.1);
+        }
+
+        /* 平板和小屏幕电脑 */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 250px 1fr;
+                gap: 20px;
+            }
+            
+            .toc {
+                padding: 15px;
+            }
+            
+            .toc h2 {
+                font-size: 1.1em;
+            }
+        }
+
+        /* 手机端 */
+        @media (max-width: 768px) {
+            .container {
+                display: block;
+                padding: 10px;
+            }
+
+            .header {
+                grid-column: auto;
+            }
+
+            .core-concept {
+                grid-column: auto;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                overflow-y: auto;
+                transition: left 0.3s ease;
+                z-index: 1001;
+                max-height: none;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .toc {
+                border-radius: 0;
+                height: 100vh;
+            }
+
+            .toggle-toc {
+                display: block;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* 滚动条美化 */
+        .toc::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 3px;
+        }
+
+        .toc::-webkit-scrollbar-thumb {
+            background: rgba(52, 152, 219, 0.5);
+            border-radius: 3px;
+        }
+
+        .toc::-webkit-scrollbar-thumb:hover {
+            background: rgba(52, 152, 219, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🎮 BlockX服务器规则</h1>
+            <p class="subtitle">创造公平、和谐、充满乐趣的游戏环境</p>
+        </div>
+
+        <div class="core-concept">
+            <h2>🌟 核心理念</h2>
+            <p>本服致力于创造一个公平、和谐、充满乐趣的游戏环境。尊重他人、文明游戏、遵守规则是所有玩家共同维护服务器健康发展的基石。</p>
+        </div>
+
+        <div class="sidebar">
+            <div class="toc" id="toc">
+                <div class="toc-header">
+                    <h2>📋 目录</h2>
+                    <button class="toggle-btn" id="toggleBtn">←</button>
+                </div>
+                <div class="toc-content">
+                    <ul>
+                        <li><a href="#section1">第一部分：基本行为准则</a></li>
+                        <li><a href="#section2">第二部分：客户端与模组规定</a></li>
+                        <li><a href="#section3">第三部分：经济与物品</a></li>
+                        <li><a href="#section4">第四部分：建筑与领地</a></li>
+                        <li><a href="#section5">第五部分：服务器共同资源</a></li>
+                        <li><a href="#section6">第六部分：违规处理</a></li>
+                        <li><a href="#section7">第七部分：管理与特权</a></li>
+                        <li><a href="#section8">第八部分：免责与解释</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="section" id="section1">
+                <h2>🤝 第一部分：基本行为准则</h2>
+                
+                <h3>1. 尊重他人</h3>
+                <div class="highlight">
+                    <ul>
+                        <li>禁止任何形式的辱骂、诽谤、人身攻击、地域攻击、歧视（性别、种族、性向、国家等）</li>
+                        <li>禁止故意恶心人、骚扰、恶意揣测、带节奏、挑拨离间</li>
+                        <li>使用文明用语，禁止刷屏、发布无关广告或垃圾信息</li>
+                    </ul>
+                </div>
+
+                <h3>2. 禁止破坏与作弊</h3>
+                <div class="warning">
+                    <ul>
+                        <li>严禁使用外挂、作弊客户端、非法模组（如透视、杀戮光环、自动钓鱼/挖矿/砍树MOD）及利用游戏BUG（如卡透视、复制物品、BUG级刷怪塔）</li>
+                        <li>禁止恶意破坏他人建筑、物品、农田、红石机械（即使在无保护区域，也需先询问）</li>
+                        <li>禁止偷窃或随意拿取其他玩家物品（包括箱子、漏斗内物、潜影盒）</li>
+                    </ul>
+                </div>
+
+                <h3>3. 信息与安全</h3>
+                <ul>
+                    <li>禁止在聊天、名字中使用敏感/不雅/政治/广告信息</li>
+                    <li>禁止泄露他人隐私或人肉搜索</li>
+                    <li>禁止冒充管理员或他人身份</li>
+                    <li>禁止任何涉及真实货币的交易（如买卖账号、物品、游戏币）</li>
+                </ul>
+
+                <h3>4. 游戏内行为</h3>
+                <h4>📢 PVP：</h4>
+                <ul>
+                    <li>禁止使用外挂PVP</li>
+                </ul>
+
+                <h4>🏗️ 建造：</h4>
+                <ul>
+                    <li>请在远离出生点（建议500格外）选择据点</li>
+                    <li>避免在主城或聚集区附近建造影响他人的大型刷怪塔或红石机械</li>
+                    <li>避免使用大量TNT/火焰进行工程以防服务器卡顿（使用、建造世吞或盾构机需提前向管理员报备）</li>
+                    <li>避免建造大量低价值建筑导致服务器卡顿</li>
+                </ul>
+
+                <h4>🏛️ 公共场所：</h4>
+                <ul>
+                    <li>"工完料净场地清"：及时清理堆积生物，及时清理堆积掉落物</li>
+                    <li>节约性能资源（不要在地狱门旁建低效刷怪点）</li>
+                    <li>末地出生点：禁止恶意建造挡路障碍</li>
+                </ul>
+            </div>
+
+            <div class="section" id="section2">
+                <h2>💻 第二部分：客户端与模组规定</h2>
+                
+                <h3>1. 允许安装</h3>
+                <div class="success">
+                    <ul>
+                        <li>资源包（材质包、光影前置/光源）</li>
+                        <li>客户端优化MOD（如 OptiFine, Sodium, Lithium）</li>
+                        <li>辅助MOD：仅地图/路标功能的地图（JourneyMap/Xaero's）、仅投影模式的Litematica（禁止自动放置！）、一键背包整理Next 等</li>
+                    </ul>
+                </div>
+
+                <h3>2. 严格禁止</h3>
+                <div class="warning">
+                    <ul>
+                        <li>任何透视类（例如X-Ray/方块透视高亮）</li>
+                        <li>任何自动化MOD（例如自动挖矿/砍树）</li>
+                        <li>任何战斗辅助MOD（例如连点器、自动瞄准/杀戮光环）</li>
+                        <li>任何移动增强类MOD（例如飞行、快速移动） </li>
+                    </ul>
+                </div>
+
+                <h3>3. 使用规则</h3>
+                <ul>
+                    <li>Litematica 仅作视觉参考，禁用"Easy Place"等自动功能。使用他人设计必须先获授权</li>
+                    <li>推荐使用纯净端/仅包含优化模组的客户端启动</li>
+                </ul>
+            </div>
+
+            <div class="section" id="section3">
+                <h2>💰 第三部分：经济与物品</h2>
+                
+                <h3>1. 交易规范</h3>
+                <ul>
+                    <li>禁止欺骗、强迫或利用BUG进行不公平交易</li>
+                </ul>
+
+                <h3>2. 资源管理</h3>
+                <ul>
+                    <li>禁止利用BUG复制物品</li>
+                    <li>公共资源点（如末地船）遵守先到先得原则</li>
+                </ul>
+
+                <h3>3. 生产活动</h3>
+                <ul>
+                    <li>避免建造引起卡顿的大型机器（如低效的依靠堆叠提升效率的机器）</li>
+                    <li>谨慎囤积可能导致卡顿的物品实体</li>
+                </ul>
+            </div>
+
+            <div class="section" id="section4">
+                <h2>🏠 第四部分：建筑与领地</h2>
+                
+                <h3>1. 领地基础</h3>
+                <div class="highlight">
+                    <ul>
+                        <li>必须使用领地保护重要财产（箱子、建筑等）。未上锁箱子丢失物品风险自担！</li>
+                        <li>领地需清晰命名标注归属</li>
+                        <li>禁止恶意圈占公共道路/资源点/他人领地</li>
+                        <li>圈地适度，勿独占大片未开发荒地</li>
+                    </ul>
+                </div>
+
+                <h3>2. 资源区保护</h3>
+                <ul>
+                    <li>禁止在公共世界独占资源点</li>
+                    <li>公共区域大型工程（如集体铁路）需公告/报备</li>
+                </ul>
+            </div>
+
+            <div class="section" id="section5">
+                <h2>🌍 第五部分：服务器共同资源</h2>
+                
+                <h3>1. 设施使用</h3>
+                <ul>
+                    <li>爱护公共设施（主城、传送点、公共农田/机器），使用后及时复原</li>
+                    <li>禁止在公共场所乱扔物品</li>
+                </ul>
+
+                <h3>2. 世界重置</h3>
+                <ul>
+                    <li>主世界可能不变；末地外岛可能会重置（会提前通知）</li>
+                </ul>
+            </div>
+
+            <div class="section" id="section6">
+                <h2>⚖️ 第六部分：违规处理</h2>
+                
+                <div class="warning">
+                    <ol>
+                        <li><strong>首次违规：</strong>警告并记录</li>
+                        <li><strong>再次违规：</strong>短期禁言 + 酌情没收物品补偿受害者</li>
+                        <li><strong>多次/严重违规：</strong>禁登1-7天 + 权限限制</li>
+                        <li><strong>恶劣行为（长期辱骂、开挂、恶意破坏）：</strong>永久封禁（账号/IP）</li>
+                        <li><strong>举报途径：</strong>私聊在线管理员并提供证据（截图/录像）</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="section" id="section7">
+                <h2>👨‍💼 第七部分：管理与特权</h2>
+                
+                <h3>1. 管理员行为</h3>
+                <ul>
+                    <li>严格遵守本规则进行管理</li>
+                    <li>管理操作需有记录</li>
+                    <li>严禁滥用权限谋利（如随意发放物品）</li>
+                </ul>
+
+                <h3>2. 玩家须知</h3>
+                <ul>
+                    <li>禁止骚扰或无理要求管理员行使特权</li>
+                    <li>对处罚有异议可向服主理性申诉（附证据）</li>
+                </ul>
+            </div>
+
+            <div class="section" id="section8">
+                <h2>📜 第八部分：免责与解释</h2>
+                
+                <div class="highlight">
+                    <ol>
+                        <li>因未遵守本规则（如未开领地保护）导致的损失，责任自负</li>
+                        <li>玩家加入服务器即视为同意本规则，请留意后续更新</li>
+                        <li>未尽事宜由服主和管理员拥有最终解释权和裁决权</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="toggle-toc" id="toggleToc">📋</button>
+
+    <script>
+        // 电脑端目录折叠功能
+        const toggleBtn = document.getElementById('toggleBtn');
+        const toc = document.getElementById('toc');
+        
+        toggleBtn.addEventListener('click', () => {
+            toc.classList.toggle('collapsed');
+        });
+
+        // 移动端目录切换功能
+        const toggleToc = document.getElementById('toggleToc');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('overlay');
+
+        toggleToc.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // 点击目录链接后关闭移动端目录
+        const tocLinks = document.querySelectorAll('.toc a');
+        tocLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
+        // 平滑滚动和活动状态
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 滚动时高亮当前章节
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.toc a');
+
+        function highlightActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // 初始化
+    </script>
+</body>
+</html>
